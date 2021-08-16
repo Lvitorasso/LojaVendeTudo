@@ -1,16 +1,15 @@
-if not exists (select 1 from sys.tables where name = 'Pedido')
-begin
-	create table Pedido
-	(
-		PedidoID int identity not null,
-		dataPedido datetime not null,
-		valorTotal numeric(12,8) not null,
-		flagDesconto int not null,
-		ValorDesconto numeric (12,8) not null,
-		pk_StatusPedido int not null,
-		pk_ItensPedido int not null,
-		pk_Pessoa int not null,
-		pk_MotivoDesconto int not null,
-		primary key(PedidoID)
-	)
-end
+Create table dbo.Pedido
+(
+	PedidoID int identity not null,
+	dataPedido datetime not null,
+	valorTotal numeric(12,8) not null,
+	flagDesconto int not null,
+	ValorDesconto numeric (12,8) not null,
+	fk_StatusPedido int not null,
+	fk_Pessoa int not null,
+	fk_MotivoDesconto int not null,
+	primary key(PedidoID),
+	constraint fk_Pedido_StatusPedido foreign key (fk_StatusPedido) references dbo.StatusPedido(StatusPedidoID),
+	constraint fk_Pedido_Pessoa foreign key (fk_Pessoa) references dbo.Pessoa(PessoaID),
+	constraint fk_Pedido_MotivoDesconto foreign key (fk_MotivoDesconto) references dbo.MotivoDesconto(MotivoDescontoID),
+)
