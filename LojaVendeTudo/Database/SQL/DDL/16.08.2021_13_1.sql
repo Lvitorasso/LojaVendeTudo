@@ -2,7 +2,7 @@ if not exists (select 1 from sys.tables where name = 'Produto')
 begin
 	Create table dbo.Produto
 	(
-		ProdutoID int identity not null,
+		ProdutoID int  not null,
 		Nome varchar(50) not null,
 		Descricao varchar(50) not null,		
 		Marca varchar(50) not null,

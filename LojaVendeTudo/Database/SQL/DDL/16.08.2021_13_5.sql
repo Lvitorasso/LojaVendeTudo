@@ -2,7 +2,7 @@ if not exists (select 1 from sys.tables where name = 'Pedido')
 begin
 	Create table dbo.Pedido
 	(
-		PedidoID int identity not null,
+		PedidoID int  not null,
 		dataPedido datetime not null,
 		valorTotal numeric(12,8) not null,
 		flagDesconto int not null,

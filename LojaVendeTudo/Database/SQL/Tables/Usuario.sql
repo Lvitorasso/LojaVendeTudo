@@ -1,6 +1,6 @@
 Create table dbo.Usuario
 (
-	UsuarioID int identity not null,
+	UsuarioID int  not null,
 	Login varchar(100) not null,
 	DataNascimento dateTime not null,
 	DataCriacaoUsuario datetime not null,

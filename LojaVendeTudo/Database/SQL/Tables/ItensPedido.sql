@@ -1,6 +1,6 @@
 Create table dbo.ItensPedido
 (
-	ItensPedidoID int identity not null,
+	ItensPedidoID int  not null,
 	valorUnitario numeric(12,8),
 	qntProduto int,
 	fk_Produto int not null,
