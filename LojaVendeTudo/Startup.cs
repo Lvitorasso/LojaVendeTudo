@@ -26,6 +26,7 @@ namespace LojaVendeTudo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -43,6 +44,8 @@ namespace LojaVendeTudo
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LojaVendeTudo v1"));
             }
+
+            app.UseCors(option => option.AllowAnyOrigin());
 
             app.UseHttpsRedirection();
 

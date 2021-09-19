@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button:focus, 
+button:active:focus, 
+button.active:focus {
+    outline: none !important;
+    outline-style: none !important;
+} 
+
+
+/* Css para colocar margem */
+.marg{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+/* Css para colocar o estilo zika */
+.btnStyle
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: white; 
+    background-color: black; 
+    border-color: black;
+}
+
+/* Css para definir o tamanho padrão dos inputs do sistema*/
+.inputStyle
+{
+    width: 400px;
+}
+
+/* Css para deixar o input vermelhão bonitao quando tiver erro */
+.form-control.ng-touched.ng-invalid{
+    border: 2px solid red;
+}
+
+/* Css para definir o tamanho padrão dos erros de inputs do sistema*/
+.errInputStyle
+{
+    width: 400px;
+}
