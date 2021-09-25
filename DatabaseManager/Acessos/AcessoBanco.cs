@@ -4,8 +4,9 @@ using System.Text;
 using System.Data.SqlClient;
 using System.Collections;
 using System.Data;
+using DatabaseManager.Validadadores;
 
-namespace DataBase.Acessos
+namespace DatabaseManager.Acessos
 {
     public class AcessoBanco : IAcessoBanco
     {
@@ -95,6 +96,40 @@ namespace DataBase.Acessos
                 throw e;
             }
         }
+
+        public object Selecionar(string where)
+        {
+            try
+            {
+                string comando = GeraComando(this, SELECT, 0, where);
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = this.Conectar();
+                cmd.CommandText = comando;
+
+                var obj = Activator.CreateInstance(this.GetType());
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    foreach (var i in this.GetType().GetProperties())
+                    {
+                        obj.GetType().GetProperty($"{i.Name}").SetValue(obj, dr[$"{i.Name}"]);
+                    }
+                }
+
+                if (cmd.Connection != null && cmd.Connection.State == ConnectionState.Open)
+                    cmd.Connection.Close();
+
+                return obj;
+            }
+            catch (Exception e)
+            {
+                // MELHORAR EXCEÇÕES 
+                throw e;
+            }
+        }
+
 
         public object Selecionar()
         {
@@ -193,14 +228,14 @@ namespace DataBase.Acessos
         }
 
 
-        private string GeraComando(object obj, int acao, int? id = 0)
+        private string GeraComando(object obj, int acao, int? id = 0, string where = null)
         {
             string comando = "";
 
             switch(acao)
             {
                 case SELECT:
-                    comando = GeraSelect(this, id);
+                    comando = GeraSelect(this, id, where);
                     break;
                 case INSERT:
                     comando = GeraInsert(this);
@@ -236,7 +271,7 @@ namespace DataBase.Acessos
 
                     if (item.PropertyType.Name.Equals("String")) // tenho que verificar o tipo para colocar as aspas
                         _values += $" {item.Name} = \'{item.GetValue(obj)}\'";
-                    else if (item.PropertyType.Name.Equals("Int32")) // int não precisa de tratamento
+                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int e long não precisa de tratamento
                         _values += $" {item.Name} = {item.GetValue(obj)}";
                     else if (item.PropertyType.Name.Equals("DateTime")) // date time 
                         _values += $" {item.Name} = \'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd")}\'";
@@ -245,7 +280,7 @@ namespace DataBase.Acessos
                 {
                     if (item.PropertyType.Name.Equals("String"))
                         _values += $" ,{item.Name} = \'{item.GetValue(obj)}\'";
-                    else if (item.PropertyType.Name.Equals("Int32"))
+                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64"))
                         _values += $" ,{item.Name} = {item.GetValue(obj)}";
                     else if (item.PropertyType.Name.Equals("DateTime"))
                         _values += $" ,{item.Name} =\'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd").Replace("/", "")}\'";
@@ -259,11 +294,20 @@ namespace DataBase.Acessos
         }
 
 
-        private string GeraSelect(object obj, int? id = 0)
+        private string GeraSelect(object obj, int? id = 0, string where = null)
         {
             string select = $"select * from {this.GetType().Name}";
-            string Where = GeraWhere(this, id);
-            select += Where;
+            string _where;
+
+            if (where != null)
+            {
+                select += where;
+            }
+            else
+            {
+                _where = GeraWhere(this, id);
+                select += _where;
+            }     
 
             return select;
         }
@@ -311,23 +355,27 @@ namespace DataBase.Acessos
             foreach (var item in props)
             {
                 //ignora ID no insert, o mesmo ainda nem deve ter ID;
-                if (item.Name.ToUpper().Contains("ID"))
+
+                if (item.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
                     continue;
                 else if (_values == "") // primeiro valor entra sem virgula
                 {
-
-                    if (item.PropertyType.Name.Equals("String")) // tenho que verificar o tipo para colocar as aspas
+                    if (item.Name.ToUpper().Contains("ID") && item.GetCustomAttributes(typeof(IdSequence), false).Length > 0)
+                        _values += $"next value for dbo.{this.GetType().Name}ID";
+                    else if (item.PropertyType.Name.Equals("String")) // tenho que verificar o tipo para colocar as aspas
                         _values += $" \'{item.GetValue(obj)}\'";
-                    else if (item.PropertyType.Name.Equals("Int32")) // int não precisa de tratamento
+                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int não precisa de tratamento
                         _values += $" {item.GetValue(obj)}";
                     else if (item.PropertyType.Name.Equals("DateTime")) // date time 
                         _values += $" \'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd")}\'";
                 }
                 else // outros valores já vão com a virgula
                 {
-                    if (item.PropertyType.Name.Equals("String")) 
+                    if (item.Name.ToUpper().Contains("ID") && item.GetCustomAttributes(typeof(IdSequence), false).Length > 0)
+                        _values += $"next value for dbo.{this.GetType().Name}ID";
+                    else if (item.PropertyType.Name.Equals("String")) 
                         _values += $" ,\'{item.GetValue(obj)}\'";
-                    else if (item.PropertyType.Name.Equals("Int32"))
+                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64"))
                         _values += $" ,{item.GetValue(obj)}";
                     else if (item.PropertyType.Name.Equals("DateTime"))
                         _values += $" ,\'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd").Replace("/","")}\'";
@@ -349,9 +397,13 @@ namespace DataBase.Acessos
 
             foreach (var item in props)
             {
-                //ignora ID no insert, o mesmo ainda nem deve ter ID;
-                if (item.Name.ToUpper().Contains("ID"))
+
+
+                if (item.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
                     continue;
+                //Caso seja auto ID utilizando a sequence da base
+                else if (item.Name.ToUpper().Contains("ID") && item.GetCustomAttributes(typeof(IdSequence), false).Length > 0)
+                    _props += $" {item.Name}";
                 else if (_props == "")  // primeiro valor entra sem virgula
                     _props += $" {item.Name}";
                 else // outros valores já vão com a virgula

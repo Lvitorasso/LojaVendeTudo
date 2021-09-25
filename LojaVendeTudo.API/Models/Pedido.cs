@@ -1,8 +1,7 @@
-using Pedidos.Models;
-using Pessoas.Models;
+using LojaVendeTudo.API.Models;
 using System;
 
-namespace Pedidos.Pedido
+namespace LojaVendeTudo.API.Models
 {
     public class Pedido
     {

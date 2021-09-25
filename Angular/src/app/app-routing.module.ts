@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'admin', component: AdminComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
       { path: 'no-access', component: NoAccessComponent }
 ];
 

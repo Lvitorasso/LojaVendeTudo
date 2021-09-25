@@ -1,6 +1,6 @@
-using Pessoas.Models;
+using LojaVendeTudo.API.Models;
 
-namespace Produtos.Models
+namespace LojaVendeTudo.API.Models
 {
     public class Produto
     {

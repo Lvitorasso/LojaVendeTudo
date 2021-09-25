@@ -41,9 +41,6 @@ import { BaseRequestOptions } from '@angular/http';
     OrderService,
 
     AuthService,
-
-    MockBackend,
-    BaseRequestOptions
   ],
   bootstrap: [AppComponent]
 })

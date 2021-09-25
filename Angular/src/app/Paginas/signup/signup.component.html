@@ -1,4 +1,62 @@
-<p>
-    signup works!
-  </p>
+<form class="form-signin" name="login" id="login" #f="ngForm" (ngSubmit)="signUp(f.value)">
+
+  <p> REALIZAR CADASTRO </p>
+
+<div class="marg">
+  <label for="inpNome" class="sr-only">
+    Nome:
+ </label>
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpNome" name="Nome">
+
+  <label for="inpSobreNome" class="sr-only">
+    Sobrenome:
+ </label>
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpSobreNome" name="SobreNome">
+
+  <label for="inpDocumento" class="sr-only">
+    Documento:
+ </label>
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpDocumento" name="Documento">
+
+  <label for="inpEmail" class="sr-only">
+    Email:
+ </label>
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpEmail" name="Email">
+
+  <label for="inpDataNascimento" class="sr-only">
+    Data de nascimento:
+ </label>
+  <input ngModel required type="date" class="form-control inputStyle"  id="inpDataNascimento" name="DataNascimento">
+
+  <label for="inpTelefone" class="sr-only">
+    Telefone:
+ </label>
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpTelefone" name="Telefone">
+
+  <label for="inpCelular" class="sr-only">
+    Celular:
+ </label>
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpCelular" name="Celular">
+
+  <label for="inpSexo" class="sr-only">
+    Sexo:
+ </label>
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpSexo" name="fk_sexo">
+    
+  <label for="inputsenha" class="sr-only">
+    Senha:
+ </label>
+  <input required type="password" id="inpSenha" name="senha" ngModel class="form-control inputStyle" placeholder="senha">
+
+  <input ngModel = "{{DtCriacao}}" type="date" id="inpDtCriacao" name="DataCriacao" class="form-control inputStyle" style="display: none;">
+  <input ngModel = "{{flagFornecedor}}" type="hidden" id="inpflagFornecedor" name="flagFornecedor" class="form-control inputStyle" style="display: none;" >
+  <input ngModel = "{{flagCliente}}" type="number" id="inpflagCliente" name="flagCliente" class="form-control inputStyle" style="display: none;">
+
+
   
+  <button class="btn btn-lg btn-primary btn-block btnStyle " type="submit" >Realizar cadastro</button>
+
+  
+
+</div>  
+  </form>

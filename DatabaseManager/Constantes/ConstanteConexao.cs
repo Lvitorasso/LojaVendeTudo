@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataBase
+namespace DatabaseManager
 {
     public class ConstanteConexao
     {

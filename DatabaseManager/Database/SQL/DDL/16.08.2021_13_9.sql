@@ -4,7 +4,6 @@ begin
 	(
 		UsuarioID int  not null,
 		Login varchar(100) not null,
-		DataNascimento dateTime not null,
 		DataCriacaoUsuario datetime not null,
 		DataUltimoLogin datetime,
 		FlagBloqueio int,

@@ -1,6 +1,6 @@
 using System;
 
-namespace Pedidos.Models
+namespace LojaVendeTudo.API.Models
 {
     public class MotivoDesconto
     {

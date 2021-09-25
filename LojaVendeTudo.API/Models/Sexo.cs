@@ -1,6 +1,6 @@
 using System;
 
-namespace Pessoas.Models
+namespace LojaVendeTudo.API.Models
 {
     public class Sexo
     {
