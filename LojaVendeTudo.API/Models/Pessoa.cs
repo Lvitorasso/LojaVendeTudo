@@ -7,7 +7,7 @@ namespace LojaVendeTudo.API.Models
     public class Pessoa : AcessoBanco
     {
 		[IdSequence]
-       	public long PessoaID { get; set; }
+       	public int PessoaID { get; set; }
 	    public string Nome { get; set; }
 	    public string Sobrenome { get; set; }  
 	    public string Documento { get; set; } 

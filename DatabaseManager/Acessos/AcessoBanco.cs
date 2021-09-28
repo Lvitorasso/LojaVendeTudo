@@ -114,6 +114,10 @@ namespace DatabaseManager.Acessos
                 {
                     foreach (var i in this.GetType().GetProperties())
                     {
+                        if (i.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
+                            continue;
+
+
                         obj.GetType().GetProperty($"{i.Name}").SetValue(obj, dr[$"{i.Name}"]);
                     }
                 }
@@ -148,6 +152,10 @@ namespace DatabaseManager.Acessos
                 {
                     foreach(var i in this.GetType().GetProperties()) 
                     {
+                        if (i.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
+                            continue;
+
+
                         obj.GetType().GetProperty($"{i.Name}").SetValue(obj,dr[$"{i.Name}"]);
                     }
                 }
@@ -181,6 +189,10 @@ namespace DatabaseManager.Acessos
                 {
                     foreach (var i in this.GetType().GetProperties())
                     {
+                        if (i.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
+                            continue;
+
+
                         obj.GetType().GetProperty($"{i.Name}").SetValue(obj, dr[$"{i.Name}"]);
                     }
                 }
@@ -268,8 +280,11 @@ namespace DatabaseManager.Acessos
                     continue;
                 else if (_values == "") // primeiro valor entra sem virgula
                 {
-
-                    if (item.PropertyType.Name.Equals("String")) // tenho que verificar o tipo para colocar as aspas
+                    if (item.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
+                        continue;
+                    else if (item.GetCustomAttributes(typeof(IdSequence), false).Length > 0)
+                        continue;
+                    else if (item.PropertyType.Name.Equals("String")) // tenho que verificar o tipo para colocar as aspas
                         _values += $" {item.Name} = \'{item.GetValue(obj)}\'";
                     else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int e long não precisa de tratamento
                         _values += $" {item.Name} = {item.GetValue(obj)}";
@@ -278,7 +293,11 @@ namespace DatabaseManager.Acessos
                 }
                 else // outros valores já vão com a virgula
                 {
-                    if (item.PropertyType.Name.Equals("String"))
+                    if (item.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
+                        continue;
+                    else if (item.GetCustomAttributes(typeof(IdSequence), false).Length > 0)
+                        continue;
+                    else if (item.PropertyType.Name.Equals("String"))
                         _values += $" ,{item.Name} = \'{item.GetValue(obj)}\'";
                     else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64"))
                         _values += $" ,{item.Name} = {item.GetValue(obj)}";
@@ -301,6 +320,7 @@ namespace DatabaseManager.Acessos
 
             if (where != null)
             {
+                select += " where ";
                 select += where;
             }
             else

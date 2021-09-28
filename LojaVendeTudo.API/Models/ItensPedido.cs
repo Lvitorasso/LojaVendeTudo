@@ -1,9 +1,11 @@
 using LojaVendeTudo.API.Models;
+using DatabaseManager.Validadadores;
 
 namespace LojaVendeTudo.API.Models
 {
     public class ItensPedido
     {
+        [IdSequence]
         public long ItensPedidoID  { get; set; }  
         public double valorUnitario { get; set; }  
         public int quantidade { get; set; }  

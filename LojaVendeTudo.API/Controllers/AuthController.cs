@@ -51,11 +51,14 @@ namespace LojaVendeTudo.Controllers
             {
                 pessoa.Incluir();
 
-                pessoa.Selecionar($" documento =  {pessoa.Documento}");
+                Pessoa nova = new Pessoa();
+
+                nova = (Pessoa)nova.Selecionar($" documento =  '{pessoa.Documento}'");
 
                 Usuario novoUsuario = new Usuario();
                 novoUsuario.Login = pessoa.Email;
                 novoUsuario.DataCriacaoUsuario = DateTime.Now;
+                novoUsuario.DataUltimoLogin = DateTime.Now;
                 novoUsuario.FlagBloqueio = 0;
                 novoUsuario.Senha = Util.GerarHashMd5(pessoa.Senha);
                 novoUsuario.fk_Pessoa = pessoa.PessoaID;
