@@ -6,22 +6,29 @@
   <label for="inpNome" class="sr-only">
     Nome:
  </label>
-  <input ngModel required type="text" class="form-control inputStyle"  id="inpNome" name="Nome">
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpNome" name="Nome"
+   minlength="3" 
+   maxlength="30">
 
   <label for="inpSobreNome" class="sr-only">
     Sobrenome:
  </label>
-  <input ngModel required type="text" class="form-control inputStyle"  id="inpSobreNome" name="SobreNome">
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpSobreNome" name="SobreNome"
+  minlength="3" 
+  maxlength="60">
 
   <label for="inpDocumento" class="sr-only">
     Documento:
  </label>
-  <input ngModel required type="text" class="form-control inputStyle"  id="inpDocumento" name="Documento">
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpDocumento" name="Documento"
+  minlength="3" 
+  maxlength="20">
 
   <label for="inpEmail" class="sr-only">
     Email:
  </label>
-  <input ngModel required type="text" class="form-control inputStyle"  id="inpEmail" name="Email">
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpEmail" name="Email"
+  maxlength="100">
 
   <label for="inpDataNascimento" class="sr-only">
     Data de nascimento:
@@ -31,12 +38,16 @@
   <label for="inpTelefone" class="sr-only">
     Telefone:
  </label>
-  <input ngModel required type="text" class="form-control inputStyle"  id="inpTelefone" name="Telefone">
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpTelefone" name="Telefone"
+  minlength="10" 
+  maxlength="10">
 
   <label for="inpCelular" class="sr-only">
     Celular:
  </label>
-  <input ngModel required type="text" class="form-control inputStyle"  id="inpCelular" name="Celular">
+  <input ngModel required type="text" class="form-control inputStyle"  id="inpCelular" name="Celular"
+  minlength="10" 
+  maxlength="10">
 
   <label for="inpSexo" class="sr-only">
     Sexo:
@@ -46,7 +57,9 @@
   <label for="inputsenha" class="sr-only">
     Senha:
  </label>
-  <input required type="password" id="inpSenha" name="senha" ngModel class="form-control inputStyle" placeholder="senha">
+  <input required type="password" id="inpSenha" name="senha" ngModel class="form-control inputStyle" placeholder="senha"
+  minlength="3" 
+  maxlength="10">
 
   <input ngModel = "{{DtCriacao}}" type="date" id="inpDtCriacao" name="DataCriacao" class="form-control inputStyle" style="display: none;">
   <input ngModel = "{{flagFornecedor}}" type="hidden" id="inpflagFornecedor" name="flagFornecedor" class="form-control inputStyle" style="display: none;" >
