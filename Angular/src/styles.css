@@ -32,7 +32,13 @@ button.active:focus {
 /* Css para definir o tamanho padrão dos inputs do sistema*/
 .inputStyle
 {
+    margin-top: 5px;
     width: 400px;
+}
+
+.lblStyle
+{
+    margin-top: 10px;
 }
 
 /* Css para deixar o input vermelhão bonitao quando tiver erro */
@@ -44,4 +50,5 @@ button.active:focus {
 .errInputStyle
 {
     width: 400px;
+    height: 20px;
 }

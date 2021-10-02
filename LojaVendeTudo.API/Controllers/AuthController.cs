@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using LojaVendeTudo.API.Models;
 using System;
-using Uteis;
+using System.Collections;
+using LojaVendeTudo.API.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,25 +28,47 @@ namespace LojaVendeTudo.Controllers
         }
 
         // POST api/<ValuesController1>
-        [Route("/api/authenticate/login")]
+        [Route("/api/authenticate/logar")]
         [HttpPost]
-        public IActionResult authenticate([FromBody] Login login)
+        public IActionResult logar([FromBody] Usuario usuario)
         {
-            if (login.usuario == "mosh@domain.com" && login.senha == "1234")
+            try
             {
-                var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik1vc2ggSGFtZWRhbmkiLCJhZG1pbiI6dHJ1ZX0.iy8az1ZDe-_hS8GLDKsQKgPHvWpHl0zkQBqy1QIPOkA";
+                if (usuario.Senha != null && usuario.Senha != "")
+                    usuario.Senha = AuthService.GerarHashMd5(usuario.Senha);
 
-                return Ok(token);
+                Usuario _usuarioBanco = new Usuario();
+
+                _usuarioBanco = (Usuario)_usuarioBanco.Selecionar($" Login =  '{usuario.Login}'");
+
+                ArrayList retorno = new ArrayList();
+
+                if (usuario.Login == _usuarioBanco.Login && usuario.Senha == _usuarioBanco.Senha)
+                {
+                    var token = AuthService.GenerateToken(usuario);
+
+                    retorno.Add(true);
+                    retorno.Add(token);
+
+                    return Ok(retorno);
+                }
+                else
+                {
+                    retorno.Add(false);
+                    retorno.Add("Usuario ou senha invalidos");
+
+                    return Ok(retorno);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                return Unauthorized();
+                return BadRequest(ex);
             }
         }
 
-        [Route("/api/authenticate/singUp")]
+        [Route("/api/authenticate/cadastrar")]
         [HttpPost]
-        public IActionResult singUp([FromBody] Pessoa pessoa)
+        public IActionResult cadastrar([FromBody] Pessoa pessoa)
         {
             try
             {
@@ -60,8 +83,8 @@ namespace LojaVendeTudo.Controllers
                 novoUsuario.DataCriacaoUsuario = DateTime.Now;
                 novoUsuario.DataUltimoLogin = DateTime.Now;
                 novoUsuario.FlagBloqueio = 0;
-                novoUsuario.Senha = Util.GerarHashMd5(pessoa.Senha);
-                novoUsuario.fk_Pessoa = pessoa.PessoaID;
+                novoUsuario.Senha = AuthService.GerarHashMd5(pessoa.Senha);
+                novoUsuario.fk_Pessoa = nova.PessoaID;
 
                 novoUsuario.Incluir();
 

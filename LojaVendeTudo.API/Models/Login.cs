@@ -5,8 +5,8 @@ namespace LojaVendeTudo.API.Models
 {
     public class Login : AcessoBanco
     {
-        [IdSequence]
-        public string usuario { get; set; }
+
+       public string usuario { get; set; }
        public string senha { get; set; }
     }
 }
