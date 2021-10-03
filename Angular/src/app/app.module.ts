@@ -1,3 +1,4 @@
+import { localStorageService } from './services/localStorageService';
 import { MockBackend } from '@angular/http/testing';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -39,7 +40,7 @@ import { BaseRequestOptions } from '@angular/http';
   ],
   providers: [
     OrderService,
-
+    localStorageService,
     AuthService,
   ],
   bootstrap: [AppComponent]

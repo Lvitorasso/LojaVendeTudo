@@ -11,23 +11,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   invalidLogin: any; 
-   url = 'https://localhost:44336';
 
   constructor(private router: Router, private authService: AuthService) { 
   }
 
   signIn(credenciais: any) {
-    
-    console.log(JSON.stringify(credenciais))
-
-    this.authService.login(this.url, credenciais)
-      .subscribe(result => { 
-
-        console.log('teste');
-
+    this.authService.login(credenciais).subscribe(result => { 
         if (result){
           this.router.navigate(['/']);
-          console.log('teste 2');
         }
         else  {
           this.invalidLogin = true; 

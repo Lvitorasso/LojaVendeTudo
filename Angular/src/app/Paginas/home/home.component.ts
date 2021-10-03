@@ -1,6 +1,7 @@
 
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { localStorageService } from 'src/app/services/localStorageService';
 
 @Component({
   selector: 'home',
@@ -9,5 +10,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomeComponent {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private localdb: localStorageService) { }
+
+  name: any = this.localdb.get('usuario');
+
+
 }
