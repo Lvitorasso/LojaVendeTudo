@@ -38,26 +38,24 @@ namespace LojaVendeTudo.Controllers
                     usuario.Senha = AuthService.GerarHashMd5(usuario.Senha);
 
                 Usuario _usuarioBanco = new Usuario();
+                Pessoa pessoa = new Pessoa();
 
                 _usuarioBanco = (Usuario)_usuarioBanco.Selecionar($" Login =  '{usuario.Login}'");
+                pessoa = (Pessoa)pessoa.Selecionar((int)_usuarioBanco.fk_Pessoa);
 
-                ArrayList retorno = new ArrayList();
 
                 if (usuario.Login == _usuarioBanco.Login && usuario.Senha == _usuarioBanco.Senha)
                 {
                     var token = AuthService.GenerateToken(usuario);
 
-                    retorno.Add(true);
-                    retorno.Add(token);
+                    var result = new { token = token, usuario = pessoa.Nome };
 
-                    return Ok(retorno);
+                    return Ok(result);
                 }
                 else
                 {
-                    retorno.Add(false);
-                    retorno.Add("Usuario ou senha invalidos");
-
-                    return Ok(retorno);
+                    var result = new { mensagemRetorno = "Usuario ou senha invalidos" };
+                    return Ok(result);
                 }
             }
             catch(Exception ex)
@@ -89,11 +87,13 @@ namespace LojaVendeTudo.Controllers
                 novoUsuario.Incluir();
 
 
-                return Ok(true);
+                var result = new { mensagemRetornoOK = "Cadastrado com sucesso!" };
+                return Ok(result);
             }
             catch(Exception e)
             {
-                return BadRequest();
+                var result = new { mensagemRetorno = e.ToString() };
+                return BadRequest(e);
             }
         }
 
