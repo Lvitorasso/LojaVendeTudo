@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -54,24 +53,11 @@ namespace LojaVendeTudo.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LojaVendeTudo.API v1"));
             }
 
-            app.Use(async (context, next) =>
-            {
-                await next();
-
-                if(context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
-                {
-                    context.Request.Path = "/index.html";
-                    await next();
-                }
-
-            });
-
-            app.UseDefaultFiles();
             app.UseHttpsRedirection();
+
             app.UseRouting();
+
             app.UseAuthorization();
-            app.UseStaticFiles();
-            
 
             app.UseEndpoints(endpoints =>
             {
