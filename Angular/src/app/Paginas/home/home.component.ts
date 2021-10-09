@@ -10,9 +10,11 @@ import { localStorageService } from 'src/app/services/localStorageService';
 })
 export class HomeComponent {
 
-  constructor(private authService: AuthService, private localdb: localStorageService) { }
+  constructor(public authService: AuthService, private localdb: localStorageService) { 
+  }
 
-  name: any = this.localdb.get('usuario');
-
+ logout(){
+   this.authService.logout();
+ }
 
 }

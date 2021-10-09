@@ -1,3 +1,4 @@
+import { JwtHelperService } from "@auth0/angular-jwt";
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -15,8 +16,9 @@ export class AuthService {
   constructor(private http: HttpClient, private localdb: localStorageService) {
   }
 
+  
 
-  login(login: any) { 
+  login(login: any) {     
    return this.http.post( this._url+'/api/authenticate/logar', JSON.stringify(login), httpOptions).pipe(map((response: any) => { 
 
         if(response.token)
@@ -33,10 +35,21 @@ export class AuthService {
   }
 
   logout() { 
+    this.localdb.remove('token');
+    this.localdb.remove('usuario');
   }
 
-  isLoggedIn() { 
-    return false;
+  estaLogado() {     
+    let jwt = new JwtHelperService();
+    let token = this.localdb.get('token');
+
+     if(!token || token == undefined || token == null || JSON.stringify(token) == '{}'){  
+      return false;    
+    }
+    
+    let estaExpirado = jwt.isTokenExpired(token);
+
+     return !estaExpirado;
   }
 
   
@@ -48,6 +61,15 @@ export class AuthService {
           return false;
        }));
    }
+
+   get usuarioAtual(){     
+    let token = this.localdb.get('token');
+
+    if(!token || token == undefined || token == null || JSON.stringify(token) == '{}')
+      return false;   
+
+      return new JwtHelperService().decodeToken(token);
+   }
    
    private handleError(error: Response){
     if(error.status == 404)
@@ -57,6 +79,7 @@ export class AuthService {
     else          
       return throwError(new AppError(error.json));
   }
+
 
 }
 const httpOptions = {

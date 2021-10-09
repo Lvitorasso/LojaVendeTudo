@@ -1,3 +1,5 @@
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { AuthGuard } from './services/auth-guard.service';
 import { localStorageService } from './services/localStorageService';
 import { MockBackend } from '@angular/http/testing';
 import { NgModule } from '@angular/core';
@@ -42,6 +44,8 @@ import { BaseRequestOptions } from '@angular/http';
     OrderService,
     localStorageService,
     AuthService,
+    AuthGuard,
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })

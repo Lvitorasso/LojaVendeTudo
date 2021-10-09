@@ -1,11 +1,11 @@
 
 <h1>Pagina Inicial</h1>
-<p>
-  Bem vindo(a) {{name}}
+<p *ngIf="authService.estaLogado()">
+  Bem vindo(a) {{authService.usuarioAtual.unique_name}}
 </p>
 <ul>
-  <li><a routerLink="/admin">Admin</a></li>
-  <li><a routerLink="/login">Login</a></li>
-  <li><a routerLink="/signup">Cadastro</a></li>
-  <li><a>Logout</a></li>
+  <li *ngIf="authService.estaLogado() && authService.usuarioAtual.role.includes('admin')" ><a routerLink="/admin">Admin</a></li>
+  <li *ngIf="!authService.estaLogado()"><a routerLink="/login">Login</a></li>
+  <li *ngIf="!authService.estaLogado()"><a routerLink="/signup">Cadastro</a></li>
+  <li *ngIf="authService.estaLogado()" ><a href="#" (click)="logout()">Logout</a></li>
 </ul>
