@@ -14,16 +14,14 @@ import { AuthService } from './services/auth.service';
 import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SignupComponent } from './Paginas/signup/signup.component';
 import { NavbarLojaComponent } from './Compartilhado/navbar/navbar-loja.component';
-import { PropagandaSlideComponent } from './compartilhado/propaganda/propaganda-slide/propaganda-slide.component';
+import { PropagandaSlideComponent } from './Compartilhado/Propaganda/propaganda-slide.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,    
     routingComponents, 
-    SignupComponent, 
     NavbarLojaComponent,
     NomeUsuarioPipe,
     PropagandaSlideComponent

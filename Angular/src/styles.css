@@ -28,6 +28,7 @@ button.active:focus {
     color: white; 
     background-color: black; 
     border-color: black;
+    width: 400px;
 }
 
 /* Css para definir o tamanho padrão dos inputs do sistema*/

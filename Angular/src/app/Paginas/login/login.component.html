@@ -1,24 +1,30 @@
 <form class="form-signin" name="login" id="login" #f="ngForm" (ngSubmit)="signIn(f.value)">
-  <div class="marg" >
-    <h2 class="form-signin-heading">
-      Please sign in
-    </h2>
-  
-    <div *ngIf="invalidLogin" class="alert alert-danger">
-      Invalid username and/or password.
-    </div>
-  
-    <label for="inpLogin" class="sr-only">
-      Email address
-    </label>
-    <input  ngModel type="email" id="inpLogin" name="Login" class="form-control inputStyle" placeholder="E-mail"  autofocus>
-  
-    <label for="inpSenha" class="sr-only"
-    >Password
-   </label>
-    <input  ngModel type="password" id="inpSenha" name="Senha" class="form-control inputStyle" placeholder="Senha" >
-    
-    <button class="btn btn-lg btn-primary btn-block btnStyle" type="submit" >Logar</button>
+  <br>
+  <br>
+  <br>
+  <div class="container" >
+    <div class="row">
+      <div class="offset-3 col-12">
+         <h2 class="form-signin-heading">
+           Login
+         </h2>
+       
+         <div *ngIf="invalidLogin" class="alert alert-danger">
+           Usuario e/ou senha incorretos.
+         </div>
+       
+         <label for="inpLogin" class="sr-only">
+           Email 
+         </label>
+         <input  ngModel type="email" id="inpLogin" name="Login" class="form-control inputStyle" placeholder="E-mail"  autofocus>
+       
+         <label for="inpSenha" class="sr-only">
+           Senha
+        </label>
+         <input  ngModel type="password" id="inpSenha" name="Senha" class="form-control inputStyle" placeholder="Senha" >
 
-</div>
-  </form>
+         <button class="btn btn-lg btn-primary btn-block btnStyle" type="submit" >Logar</button>
+      </div>
+    </div>
+  </div>
+</form>
