@@ -16,11 +16,11 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" routerLink="/produtos"
-              [queryParams]="{categoria: 1, order: 'populares'}"> Categoria 1</a></li>
+              [queryParams]="{categoria: 1, order: 'populares'}">Celulares</a></li>
             <li><a class="dropdown-item" routerLink="/produtos"
-              [queryParams]="{categoria: 2, order: 'populares'}">Categoria 2</a></li>
+              [queryParams]="{categoria: 2, order: 'populares'}">Eletronicos</a></li>
             <li><a class="dropdown-item" routerLink="/produtos"
-              [queryParams]="{categoria: 3, order: 'populares'}">Categoria 3</a></li>
+              [queryParams]="{categoria: 3, order: 'populares'}">Consoles</a></li>
           </ul>
         </li>
 
@@ -45,11 +45,11 @@
       </ul>
 
         <a class="navbar-brand" routerLink="#">     
-          <img width="30" height="24" src="./assets/carrinho-compra.png">
+          <img width="30" height="20" src="./assets/carrinho-compra.png">
         </a>
     
         <p *ngIf="authService.estaLogado()" style=" margin-right: 10px;">
-          Bem vindo(a) <a routerLink="/login">{{authService.usuarioAtual.unique_name | nomeUsuario}} </a>
+          Bem vindo(a) <a routerLink="/perfil">{{authService.usuarioAtual.unique_name | nomeUsuario}} </a>
           |
           <a href="#" (click)="logout()">Sair</a>
         </p>
