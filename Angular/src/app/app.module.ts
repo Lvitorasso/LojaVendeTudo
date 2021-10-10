@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarLojaComponent } from './Compartilhado/navbar/navbar-loja.component';
 import { PropagandaSlideComponent } from './Compartilhado/Propaganda/propaganda-slide.component';
+import { ProdutosComponent } from './paginas/produtos/produtos.component';
+import { FooterLojaComponent } from './compartilhado/footer-loja/footer-loja.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { PropagandaSlideComponent } from './Compartilhado/Propaganda/propaganda-
     routingComponents, 
     NavbarLojaComponent,
     NomeUsuarioPipe,
-    PropagandaSlideComponent
+    PropagandaSlideComponent,
+    ProdutosComponent,
+    FooterLojaComponent
   ],
   imports: [
     BrowserModule,
