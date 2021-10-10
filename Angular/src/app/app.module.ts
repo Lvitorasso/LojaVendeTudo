@@ -21,13 +21,14 @@ import { NoAccessComponent } from './Paginas/no-access/no-access.component';
 import { NotFoundComponent } from './Paginas/not-found/not-found.component';
 import { SignupComponent } from './Paginas/signup/signup.component';
 import { BaseRequestOptions } from '@angular/http';
+import { NavbarLojaComponent } from './Compartilhado/navbar/navbar-loja.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,    
     routingComponents, 
-    SignupComponent
+    SignupComponent, NavbarLojaComponent
   ],
   imports: [
     BrowserModule,

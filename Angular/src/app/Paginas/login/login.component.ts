@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -15,8 +15,16 @@ export class LoginComponent {
   constructor(
     private router: Router,     
     private route: ActivatedRoute,
-    private authService: AuthService) { 
-  }
+    private authService: AuthService,
+    fb: FormBuilder) { 
+      fb.group({
+        Login:['',Validators.required],
+        Senha:['',Validators.required]
+     })
+   };
+  
+
+
 
   signIn(credenciais: any) {
     this.authService.login(credenciais).subscribe(result => { 
