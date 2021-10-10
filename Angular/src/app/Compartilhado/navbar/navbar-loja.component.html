@@ -1,4 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <a class="navbar-brand" routerLink="#">     
       <img width="30" height="24" src="./assets/brushlogo.png">
     </a>
@@ -7,22 +9,18 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/followers"
-          [queryParams]="{page: 1, order: 'newest'}">GitHub<span class="sr-only"></span></a>
-        </li>
-
+      <ul class="navbar-nav me-auto col-10 col-lx-10">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Categorias
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" routerLink="/produtos"
+              [queryParams]="{categoria: 1, order: 'populares'}"> Categoria 1</a></li>
+            <li><a class="dropdown-item" routerLink="/produtos"
+              [queryParams]="{categoria: 2, order: 'populares'}">Categoria 2</a></li>
+            <li><a class="dropdown-item" routerLink="/produtos"
+              [queryParams]="{categoria: 3, order: 'populares'}">Categoria 3</a></li>
           </ul>
         </li>
 
@@ -35,25 +33,31 @@
         </li>
 
         <li class="nav-item " *ngIf="authService.estaLogado() && authService.usuarioAtual.role.includes('admin')">
-          <a routerLink="/admin">Admin</a>
+          <a   class="nav-link" routerLink="/admin">Admin</a>
         </li>
+
+        <div class="offset-1 col-8">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Pesquisar" aria-label="Pesquisar" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2"> <img width="30" height="24" src="./assets/lupa.png"></button>
+          </div>
+        </div>  
       </ul>
 
-      <a class="navbar-brand" routerLink="#">     
-        <img width="30" height="24" src="./assets/carrinho-compra.png">
-      </a>
-  
-      <p *ngIf="authService.estaLogado()" style="color: white; margin-right: 10px;">
-        Bem vindo(a) {{authService.usuarioAtual.unique_name}} 
-        |
-        <a href="#" (click)="logout()">Logout</a>
-      </p>
-  
-      <p *ngIf="!authService.estaLogado()" style="color: white; margin-right: 10px;">
-        <a routerLink="/login">Login</a>
-        |
-        <a routerLink="/signup">Cadastro</a>
-      </p>
-  
+        <a class="navbar-brand" routerLink="#">     
+          <img width="30" height="24" src="./assets/carrinho-compra.png">
+        </a>
+    
+        <p *ngIf="authService.estaLogado()" style=" margin-right: 10px;">
+          Bem vindo(a) <a routerLink="/login">{{authService.usuarioAtual.unique_name | nomeUsuario}} </a>
+          |
+          <a href="#" (click)="logout()">Sair</a>
+        </p>
+    
+        <p *ngIf="!authService.estaLogado()" style=" margin-right: 10px;">
+          <a routerLink="/login">Login</a>
+          |
+          <a routerLink="/signup">Cadastro</a>
+        </p>
     </div>
   </nav>
