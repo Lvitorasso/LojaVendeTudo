@@ -13,12 +13,10 @@ import { OrderService } from './services/order.service';
 import { AuthService } from './services/auth.service';
 import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarLojaComponent } from './Compartilhado/navbar/navbar-loja.component';
 import { PropagandaSlideComponent } from './Compartilhado/Propaganda/propaganda-slide.component';
-import { AdminProdutosComponent } from './Paginas/admin/admin-produtos/admin-produtos.component';
-import { AdminPedidosComponent } from './Paginas/admin/admin-pedidos/admin-pedidos.component';
 import { FooterLojaComponent } from './Compartilhado/footer-loja/footer-loja.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -28,8 +26,6 @@ import { FooterLojaComponent } from './Compartilhado/footer-loja/footer-loja.com
     NavbarLojaComponent,
     NomeUsuarioPipe,
     PropagandaSlideComponent,
-    AdminProdutosComponent,
-    AdminPedidosComponent,
     FooterLojaComponent
   ],
   imports: [
@@ -39,9 +35,9 @@ import { FooterLojaComponent } from './Compartilhado/footer-loja/footer-loja.com
     MatToolbarModule,
     MatIconModule,
     FormsModule,
-    NgbModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     OrderService,
