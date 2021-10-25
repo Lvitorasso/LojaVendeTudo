@@ -1,13 +1,12 @@
-
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: 'app-admin-pedidos',
+  templateUrl: './admin-pedidos.component.html',
+  styleUrls: ['./admin-pedidos.component.css']
 })
-export class AdminComponent implements OnInit {
+export class AdminPedidosComponent implements OnInit {
   orders: any;
 
   constructor(private orderService: OrderService) { }
@@ -16,4 +15,5 @@ export class AdminComponent implements OnInit {
     this.orderService.getOrders()
       .subscribe(orders => this.orders = orders);
   }
+
 }

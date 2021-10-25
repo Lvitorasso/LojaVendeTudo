@@ -1,9 +1,10 @@
 using LojaVendeTudo.API.Models;
 using DatabaseManager.Validadadores;
+using DatabaseManager.Acessos;
 
 namespace LojaVendeTudo.API.Models
 {
-    public class Produto
+    public class Produto : AcessoBanco
     {
         [IdSequence]
         public long ProdutoID { get; set; }
@@ -12,7 +13,7 @@ namespace LojaVendeTudo.API.Models
 	    public string Marca { get; set; }
 	    public string Fabricante { get; set; }
 	    public string Peso { get; set; }
-	    public double PrecoUnitario { get; set; }
-	    public Pessoa fk_Fornecedor { get; set; }
+	    public decimal PrecoUnitario { get; set; }
+	    public long fk_Fornecedor { get; set; }
     }
 }

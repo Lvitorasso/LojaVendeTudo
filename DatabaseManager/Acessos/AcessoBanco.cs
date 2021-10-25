@@ -11,6 +11,7 @@ namespace DatabaseManager.Acessos
     public class AcessoBanco : IAcessoBanco
     {
         ConstanteConexao cons = new ConstanteConexao();
+        SqlTransaction transacao;
         private const int SELECT = 1;
         private const int INSERT = 2;
         private const int DELETE = 3;
@@ -48,6 +49,9 @@ namespace DatabaseManager.Acessos
 
                     foreach (var i in this.GetType().GetProperties())
                     {
+                        if (i.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
+                            continue;
+
                         obj.GetType().GetProperty($"{i.Name}").SetValue(obj, dr[$"{i.Name}"]);
                     }
 
@@ -78,20 +82,24 @@ namespace DatabaseManager.Acessos
             try
             {
                 string comando = GeraComando(this,INSERT);
-   
+
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = this.Conectar();
+                transacao = cmd.Connection.BeginTransaction();
+                cmd.Transaction = transacao;
                 cmd.CommandText = comando;
 
                 // salva no BD
                 cmd.ExecuteNonQuery();
 
+                transacao.Commit();
+
                 if (cmd.Connection != null && cmd.Connection.State == ConnectionState.Open)
                     cmd.Connection.Close();
-
             }
             catch (Exception e)
             {
+                transacao.Rollback();
                 // MELHORAR EXCEPTIONS
                 throw e;
             }
@@ -116,7 +124,6 @@ namespace DatabaseManager.Acessos
                     {
                         if (i.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
                             continue;
-
 
                         obj.GetType().GetProperty($"{i.Name}").SetValue(obj, dr[$"{i.Name}"]);
                     }
@@ -211,17 +218,30 @@ namespace DatabaseManager.Acessos
 
         public void Apagar(int? id) 
         {
-            string comando = GeraComando(this, DELETE, id);
+            try
+            {
+                string comando = GeraComando(this, DELETE, id);
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = this.Conectar();
-            cmd.CommandText = comando;
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = this.Conectar();
+                cmd.CommandText = comando;
 
-            // Apaga no BD
-            cmd.ExecuteNonQuery();
+                transacao = cmd.Connection.BeginTransaction();
+                cmd.Transaction = transacao;
 
-            if (cmd.Connection != null && cmd.Connection.State == ConnectionState.Open)
-                cmd.Connection.Close();
+                // Apaga no BD
+                cmd.ExecuteNonQuery();
+
+                transacao.Commit();
+
+                if (cmd.Connection != null && cmd.Connection.State == ConnectionState.Open)
+                    cmd.Connection.Close();
+            }
+            catch(Exception e)
+            {
+                transacao.Rollback();
+                throw e;
+            }
         }
 
         public void Atualizar(int? id)
@@ -288,6 +308,8 @@ namespace DatabaseManager.Acessos
                         _values += $" {item.Name} = \'{item.GetValue(obj)}\'";
                     else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int e long não precisa de tratamento
                         _values += $" {item.Name} = {item.GetValue(obj)}";
+                    else if (item.PropertyType.Name.Equals("Double") || item.PropertyType.Name.Equals("Decimal"))
+                        _values += $" {item.Name} = {Convert.ToDouble(item.GetValue(obj).ToString().Replace(",","."))}";
                     else if (item.PropertyType.Name.Equals("DateTime")) // date time 
                         _values += $" {item.Name} = \'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd")}\'";
                 }
@@ -299,8 +321,10 @@ namespace DatabaseManager.Acessos
                         continue;
                     else if (item.PropertyType.Name.Equals("String"))
                         _values += $" ,{item.Name} = \'{item.GetValue(obj)}\'";
-                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64"))
+                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int e long não precisa de tratamento
                         _values += $" ,{item.Name} = {item.GetValue(obj)}";
+                    else if (item.PropertyType.Name.Equals("Double") || item.PropertyType.Name.Equals("Decimal"))
+                        _values += $" ,{item.Name} = {Convert.ToDouble(item.GetValue(obj).ToString().Replace(",", "."))}";
                     else if (item.PropertyType.Name.Equals("DateTime"))
                         _values += $" ,{item.Name} =\'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd").Replace("/", "")}\'";
                 }
@@ -384,8 +408,10 @@ namespace DatabaseManager.Acessos
                         _values += $"next value for dbo.{this.GetType().Name}ID";
                     else if (item.PropertyType.Name.Equals("String")) // tenho que verificar o tipo para colocar as aspas
                         _values += $" \'{item.GetValue(obj)}\'";
-                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int não precisa de tratamento
-                        _values += $" {item.GetValue(obj)}";
+                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int e long não precisa de tratamento
+                        _values += $"  {item.GetValue(obj)}";
+                    else if (item.PropertyType.Name.Equals("Double") || item.PropertyType.Name.Equals("Decimal"))
+                        _values += $" {Convert.ToDouble(item.GetValue(obj).ToString().Replace(",", "."))}";
                     else if (item.PropertyType.Name.Equals("DateTime")) // date time 
                         _values += $" \'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd")}\'";
                 }
@@ -395,8 +421,10 @@ namespace DatabaseManager.Acessos
                         _values += $"next value for dbo.{this.GetType().Name}ID";
                     else if (item.PropertyType.Name.Equals("String")) 
                         _values += $" ,\'{item.GetValue(obj)}\'";
-                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64"))
+                    else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int e long não precisa de tratamento
                         _values += $" ,{item.GetValue(obj)}";
+                    else if (item.PropertyType.Name.Equals("Double") || item.PropertyType.Name.Equals("Decimal"))
+                        _values += $" ,{item.GetValue(obj).ToString().Replace(",", ".")}";
                     else if (item.PropertyType.Name.Equals("DateTime"))
                         _values += $" ,\'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd").Replace("/","")}\'";
                 }

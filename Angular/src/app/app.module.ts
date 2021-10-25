@@ -16,8 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarLojaComponent } from './Compartilhado/navbar/navbar-loja.component';
 import { PropagandaSlideComponent } from './Compartilhado/Propaganda/propaganda-slide.component';
-import { ProdutosComponent } from './paginas/produtos/produtos.component';
-import { FooterLojaComponent } from './compartilhado/footer-loja/footer-loja.component';
+import { AdminProdutosComponent } from './Paginas/admin/admin-produtos/admin-produtos.component';
+import { AdminPedidosComponent } from './Paginas/admin/admin-pedidos/admin-pedidos.component';
+import { FooterLojaComponent } from './Compartilhado/footer-loja/footer-loja.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FooterLojaComponent } from './compartilhado/footer-loja/footer-loja.com
     NavbarLojaComponent,
     NomeUsuarioPipe,
     PropagandaSlideComponent,
-    ProdutosComponent,
+    AdminProdutosComponent,
+    AdminPedidosComponent,
     FooterLojaComponent
   ],
   imports: [
