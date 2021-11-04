@@ -10,7 +10,7 @@ namespace LojaVendeTudo.API.Service
 {
     public static class AuthService
     {
-        public static string GenerateToken(Usuario user)
+        public static string GenerateToken(Pessoa user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(user.Senha);
@@ -18,8 +18,8 @@ namespace LojaVendeTudo.API.Service
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Login.ToString()),
-                    new Claim(ClaimTypes.Role, "admin")
+                    new Claim(ClaimTypes.Name, user.Login),
+                    new Claim(ClaimTypes.Role, user.role)
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

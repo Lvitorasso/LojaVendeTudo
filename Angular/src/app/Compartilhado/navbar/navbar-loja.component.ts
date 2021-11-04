@@ -9,6 +9,7 @@ import { localStorageService } from 'src/app/services/localStorageService';
   styleUrls: ['./navbar-loja.component.css']
 })
 export class NavbarLojaComponent implements OnInit {
+  usuario: any;
 
   constructor(public authService: AuthService, private localdb: localStorageService) { 
   }
@@ -17,7 +18,7 @@ export class NavbarLojaComponent implements OnInit {
   }
 
   logout(){
-    this.authService.logout();
+    this.authService.deslogar();
   }
 
 }

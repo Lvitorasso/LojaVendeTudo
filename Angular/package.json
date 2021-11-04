@@ -28,6 +28,7 @@
     "@angular/router": "~12.2.0",
     "@auth0/angular-jwt": "^5.0.2",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+    "@types/gapi.auth2": "0.0.55",
     "angular-bootstrap": "^0.12.2",
     "bootstrap": "^5.1.1",
     "express": "^4.17.1",

@@ -12,8 +12,10 @@ export class CadastroComponent implements OnInit {
 
   flagFornecedor: any = 0;
   flagCliente: any = 1;
+  FlagBloqueio: any = 0;
   currentDate = new Date();
   DtCriacao = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
+  DtUltimoLogin = formatDate(this.currentDate, 'yyyy-MM-dd', 'en-US');
   invalid: any; 
 
   constructor(private router: Router, private authService: AuthService) { }

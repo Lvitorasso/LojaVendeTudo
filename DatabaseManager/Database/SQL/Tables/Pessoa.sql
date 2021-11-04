@@ -10,7 +10,12 @@ Create table dbo.Pessoa
 	Telefone varchar(20),
 	Celular varchar(20),
 	FlagFornecedor int,
+	Login varchar(100) not null,
+	DataUltimoLogin datetime,
 	FlagCliente int,
+	Role varchar(20),
+	FlagBloqueio int,
+	Senha varchar(100) not null,
 	fk_Sexo int not null,
 	primary key(PessoaID),
 	constraint fk_Pessoa_Sexo  foreign key (fk_Sexo) references dbo.Sexo(SexoID)

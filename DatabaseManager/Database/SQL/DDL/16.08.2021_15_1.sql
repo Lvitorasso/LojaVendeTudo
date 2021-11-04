@@ -62,10 +62,4 @@ begin
 		maxvalue 999999;     
 end
 
-if not exists (select 1 from sys.sequences where name = 'UsuarioID')
-begin
-	CREATE SEQUENCE UsuarioID  
-		START WITH 1  
-		INCREMENT BY 1
-		maxvalue 999999;     
-end
+

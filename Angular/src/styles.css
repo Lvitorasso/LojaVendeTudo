@@ -52,5 +52,8 @@ button.active:focus {
 .errInputStyle
 {
     width: 400px;
-    height: 20px;
+    height: 40px;
 }
+
+.btn:hover {
+    background-color:rgb(80, 82, 80);  }

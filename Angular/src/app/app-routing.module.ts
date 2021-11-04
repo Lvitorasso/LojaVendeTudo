@@ -1,3 +1,4 @@
+import { AdminUsuariosComponent } from './Paginas/admin/admin-usuarios/admin-usuarios.component';
 import { AdminPedidosComponent } from './Paginas/admin/admin-pedidos/admin-pedidos.component';
 import { AdminProdutosComponent } from './Paginas/admin/admin-produtos/admin-produtos.component';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
@@ -23,9 +24,10 @@ const routes: Routes = [
       { path: 'carrinho', component: CarrinhoComponent },
       { path: 'checkOut', component: CheckOutComponent },
       { path: 'compraFinalizada', component: CompraFinalizadaComponent },
-      { path: 'minhasCompras', component: MinhasComprasComponent },
-      { path: 'admPedidos', component: AdminProdutosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'admProdutos', component: AdminPedidosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'minhas/Compras', component: MinhasComprasComponent },
+      { path: 'adm/Pedidos', component: AdminProdutosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'adm/Produtos', component: AdminPedidosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'adm/Usuarios', component: AdminUsuariosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'no-access', component: NoAccessComponent }
 ];
 
@@ -38,4 +40,4 @@ export class AppRoutingModule { }
 
 
 export const routingComponents = [HomeComponent,  LoginComponent, NoAccessComponent, NotFoundComponent, CadastroComponent, ProdutosComponent, CarrinhoComponent,
-  CheckOutComponent, CompraFinalizadaComponent, MinhasComprasComponent, AdminProdutosComponent, AdminPedidosComponent]
+  CheckOutComponent, CompraFinalizadaComponent, MinhasComprasComponent, AdminProdutosComponent, AdminPedidosComponent, AdminUsuariosComponent]

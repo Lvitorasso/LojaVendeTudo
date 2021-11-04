@@ -7,30 +7,32 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto col-10 col-lx-10">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categorias
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" routerLink="/produtos"
-              [queryParams]="{categoria: 1, order: 'populares'}">Celulares</a></li>
-            <li><a class="dropdown-item" routerLink="/produtos"
-              [queryParams]="{categoria: 2, order: 'populares'}">Eletronicos</a></li>
-            <li><a class="dropdown-item" routerLink="/produtos"
-              [queryParams]="{categoria: 3, order: 'populares'}">Consoles</a></li>
-          </ul> 
-
+      <ul class="navbar-nav me-auto col-10 col-lx-10">     
         <li class="nav-item">
-          <a class="nav-link"routerLink="/autores">Autores</a>
+          <a class="nav-link"routerLink="/Produtos">Produtos</a>
         </li>
-
         <li class="nav-item">
           <a class="nav-link" routerLink="/cadastro-cursos">Cursos</a>
         </li>
-
-        <li class="nav-item " *ngIf="authService.estaLogado() && authService.usuarioAtual.role.includes('admin')">
-          <a   class="nav-link" routerLink="/admin">Admin</a>
+        <li ngbDropdown class="nav-item dropdown" *ngIf="authService.estaLogado()">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{authService.usuarioAtual.unique_name}}
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <!-- [queryParams]="{categoria: 1, order: 'populares'}" -->
+            <a class="dropdown-item" routerLink="/minhas/Compras">
+              Meus pedidos
+            </a>           
+           <a class="dropdown-item" routerLink="/adm/Pedidos"  *ngIf="authService.estaLogado() && authService.usuarioAtual.role.includes('admin')"> 
+              Adm. pedidos
+            </a>           
+          <a class="dropdown-item" routerLink="/adm/Produtos"  *ngIf="authService.estaLogado() && authService.usuarioAtual.role.includes('admin')">
+            Adm. produtos
+            </a>
+            <a class="dropdown-item" routerLink="/adm/Usuarios"  *ngIf="authService.estaLogado() && authService.usuarioAtual.role.includes('admin')">
+              Adm. Usuarios
+            </a>
+          </div>         
         </li>
 
         <div class="offset-1 col-8">
@@ -46,7 +48,7 @@
         </a>
     
         <p *ngIf="authService.estaLogado()" style=" margin-right: 10px;">
-          Bem vindo(a) <a routerLink="/perfil">{{authService.usuarioAtual.unique_name | nomeUsuario}} </a>
+          Bem vindo(a) <a routerLink="/perfil">{{authService.usuarioAtual.unique_name}} </a>
           |
           <a href="#" (click)="logout()">Sair</a>
         </p>

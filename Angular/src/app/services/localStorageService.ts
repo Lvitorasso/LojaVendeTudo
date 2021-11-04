@@ -14,7 +14,8 @@ export class localStorageService {
   }
 
   get(key: string) {
-    try {
+    try 
+    {
       return JSON.parse(localStorage.getItem(key) || '{}');
     } 
     catch (e) {

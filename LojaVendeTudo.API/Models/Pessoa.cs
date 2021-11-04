@@ -18,8 +18,11 @@ namespace LojaVendeTudo.API.Models
 	    public string Celular { get; set; }
 	    public int FlagFornecedor { get; set; }
 	    public int FlagCliente { get; set; }
-	    public long fk_Sexo { get; set; } 
-		[IgnorarDB]
+	    public long fk_Sexo { get; set; }
+		public DateTime DataUltimoLogin { get; set; }
+		public string Login { get; set; }
 		public string Senha { get; set; }
+		public int FlagBloqueio { get; set; }
+		public string role { get; set; }
     }
 }

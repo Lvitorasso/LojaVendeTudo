@@ -1,18 +1,23 @@
+import { delay, map } from 'rxjs/operators';
 
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from 'src/app/services/auth.service';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   invalidLogin: any; 
-
-  constructor(
+  user: any;
+  retorn: any;
+  teste: any;
+  
+  constructor( private ref: ChangeDetectorRef,
     private router: Router,     
     private route: ActivatedRoute,
     private authService: AuthService,
@@ -22,12 +27,14 @@ export class LoginComponent {
         Senha:['',Validators.required]
      })
    };
+
+   ngOnInit(){
+
+   }
   
-
-
-
   signIn(credenciais: any) {
-    this.authService.login(credenciais).subscribe(result => { 
+
+    this.authService.logar(credenciais).subscribe(result => { 
         if (result){
           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
           this.router.navigate([returnUrl || '/']);
@@ -36,6 +43,23 @@ export class LoginComponent {
           this.invalidLogin = true; 
         }
       });
+  }
+
+ logarGoogle(){   
+    this.authService.logarGoogle();
+
+    // if (this.authService.estaLogado()){
+    //   let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+    //   this.router.navigate([returnUrl || '/']);
+      
+    // }
+    // else  {
+    //   this.invalidLogin = true; 
+    // }
+  }
+
+  deslogarGoogle(){
+    this.authService.deslogarGoogle()
   }
 
 }

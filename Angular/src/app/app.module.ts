@@ -1,3 +1,4 @@
+import { UsuarioService } from './services/usuario.service';
 import { NomeUsuarioPipe } from './Compartilhado/Pipes/nome-usuario.pipe';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { AuthGuard } from './services/auth-guard.service';
@@ -44,7 +45,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     localStorageService,
     AuthService,
     AuthGuard,
-    AdminAuthGuard
+    AdminAuthGuard,
+    UsuarioService
   ],
   bootstrap: [AppComponent]
 })

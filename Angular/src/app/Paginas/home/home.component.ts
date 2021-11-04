@@ -14,7 +14,7 @@ export class HomeComponent {
   }
 
  logout(){
-   this.authService.logout();
+   this.authService.deslogar();
  }
 
 }

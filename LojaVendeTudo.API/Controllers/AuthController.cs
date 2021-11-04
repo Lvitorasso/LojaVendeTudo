@@ -30,33 +30,35 @@ namespace LojaVendeTudo.Controllers
         // POST api/<ValuesController1>
         [Route("/api/authenticate/logar")]
         [HttpPost]
-        public IActionResult logar([FromBody] Usuario usuario)
+        public IActionResult logar([FromBody] Pessoa usuario)
         {
             try
             {
-                if (usuario.Senha != null && usuario.Senha != "")
+                if (usuario.Senha != null && usuario.Senha != "" && usuario.Senha != string.Empty)
                     usuario.Senha = AuthService.GerarHashMd5(usuario.Senha);
+                else
+                    return Ok(new { mensagemRetorno = "Por favor informar a senha" });
 
-                Usuario _usuarioBanco = new Usuario();
-                Pessoa pessoa = new Pessoa();
+                if (usuario.Login == null && usuario.Login == "" && usuario.Login == string.Empty)
+                    return Ok(new { mensagemRetorno = "Por favor informar a senha" });
 
-                _usuarioBanco = (Usuario)_usuarioBanco.Selecionar($" Login =  '{usuario.Login}'");
-                pessoa = (Pessoa)pessoa.Selecionar((int)_usuarioBanco.fk_Pessoa);
+                Pessoa pessoaBanco = new Pessoa();
 
+                //pego o usuario da base para autenticar
+                pessoaBanco = (Pessoa)pessoaBanco.Selecionar($" Login =  '{usuario.Login}'");
 
-                if (usuario.Login == _usuarioBanco.Login && usuario.Senha == _usuarioBanco.Senha)
+                if (usuario.Login == pessoaBanco.Login && usuario.Senha == pessoaBanco.Senha)
                 {
+                    //usuario OK, vou alterar o login para o nome e setar sua role para o front
+                    usuario.role = pessoaBanco.role;
+                    usuario.Nome = pessoaBanco.Nome;
+
                     var token = AuthService.GenerateToken(usuario);
 
-                    var result = new { token = token, usuario = pessoa.Nome };
-
-                    return Ok(result);
+                    return Ok(new { token = token, usuario = usuario.Nome });
                 }
                 else
-                {
-                    var result = new { mensagemRetorno = "Usuario ou senha invalidos" };
-                    return Ok(result);
-                }
+                    return Ok(new { mensagemRetorno = "Usuario ou senha invalidos" });
             }
             catch(Exception ex)
             {
@@ -70,30 +72,17 @@ namespace LojaVendeTudo.Controllers
         {
             try
             {
+                //criptografa a senha
+                pessoa.Senha = AuthService.GerarHashMd5(pessoa.Senha);
+                pessoa.Login = pessoa.Email;
+                pessoa.role = "usuario";
                 pessoa.Incluir();
 
-                Pessoa nova = new Pessoa();
-
-                nova = (Pessoa)nova.Selecionar($" documento =  '{pessoa.Documento}'");
-
-                Usuario novoUsuario = new Usuario();
-                novoUsuario.Login = pessoa.Email;
-                novoUsuario.DataCriacaoUsuario = DateTime.Now;
-                novoUsuario.DataUltimoLogin = DateTime.Now;
-                novoUsuario.FlagBloqueio = 0;
-                novoUsuario.Senha = AuthService.GerarHashMd5(pessoa.Senha);
-                novoUsuario.fk_Pessoa = nova.PessoaID;
-
-                novoUsuario.Incluir();
-
-
-                var result = new { mensagemRetornoOK = "Cadastrado com sucesso!" };
-                return Ok(result);
+                return Ok(new { mensagemRetornoOK = "Cadastrado com sucesso!" });
             }
             catch(Exception e)
             {
-                var result = new { mensagemRetorno = e.ToString() };
-                return BadRequest(e);
+                return BadRequest(new { mensagemRetorno = e.ToString() });
             }
         }
 
