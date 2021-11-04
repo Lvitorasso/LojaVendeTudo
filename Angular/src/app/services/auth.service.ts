@@ -1,4 +1,4 @@
-import { UsuarioService } from './usuario.service';
+import { PessoaService } from './pessoa/pessoa.service';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, 
     private localdb: localStorageService,
-    private userService: UsuarioService) 
+    private userService: PessoaService) 
     {
       //carregando a biblioteca de autenticação do google
         gapi.load('auth2', () => {
