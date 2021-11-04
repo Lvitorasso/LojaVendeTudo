@@ -17,8 +17,8 @@ namespace LojaVendeTudo.API.Controllers
     public class PessoaController : ControllerBase
     {
         [HttpGet]
-        [Route("/getTodosUsuarios")]
-        public IActionResult getTodosUsuarios()
+        [Route("/api/pessoas/GetTodosUsuarios")]
+        public IActionResult GetTodosUsuarios()
         {
             try
             {
@@ -40,7 +40,7 @@ namespace LojaVendeTudo.API.Controllers
         }
 
         [HttpGet]
-        [Route("/ObterPessoaPorID")]
+        [Route("/api/pessoas/ObterPessoaPorID")]
         public IActionResult ObterPessoaPorID(int id)
         {
             try
@@ -66,7 +66,7 @@ namespace LojaVendeTudo.API.Controllers
         }
 
         [HttpGet]
-        [Route("/ObterPessoaPorNome")]
+        [Route("/api/pessoas/ObterPessoaPorNome/nome")]
         public IActionResult ObterPessoaPorNome(string nome)
         {
             try
@@ -92,5 +92,29 @@ namespace LojaVendeTudo.API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPost]
+        [Route("/api/pessoas/salvarPessoaPorID/pessoa")]
+        public IActionResult salvarPessoaPorID(Pessoa pessoa)
+        {
+            try
+            {
+                if (pessoa.PessoaID <= 0)
+                    return Ok("O parametro pessoa é obrigatorio");
+
+                if (pessoa == null)
+                    return Ok("O parametro pessoa é obrigatorio");
+
+                pessoa.Atualizar(pessoa.PessoaID);
+
+
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

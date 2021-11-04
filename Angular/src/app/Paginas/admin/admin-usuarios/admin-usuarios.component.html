@@ -1,19 +1,34 @@
-<p>Usuarios do sistema/p>
-
 <div class="container">
+  <h2>Usuarios do sistema</h2>
     <table class="table">
         <thead>
           <tr>
+            <th scope="col"></th>
+            <th scope="col">ID</th>
             <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
             <th scope="col">login</th>
+            <th scope="col">Data de Nasc.</th>
             <th scope="col">admin</th>
+            <th scope="col">Bloqueado?</th>
           </tr>
         </thead>
         <tbody>
-          <tr >
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+          <tr *ngFor="let pessoa of pessoas">
+            <td><a [routerLink]="['/adm/Usuarios/', pessoa.PessoaID]">Editar</a></td>
+            <td>{{pessoa.PessoaID}}</td>
+            <td>{{pessoa.Nome}}</td>
+            <td>{{pessoa.Sobrenome}}</td>
+            <td>{{pessoa.Login}}</td>
+            <td>{{pessoa.DataNascimento}}</td>
+            <td *ngIf="pessoa.role == 'usuario' else adm">NÃO</td>
+            <ng-template #adm>
+              <td>SIM</td>
+            </ng-template>
+            <td *ngIf="pessoa.FlagBloqueio == 0 else bloq">NÃO</td>
+            <ng-template #bloq>
+              <td>SIM</td>
+            </ng-template>
           </tr>
         </tbody>
       </table>

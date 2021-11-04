@@ -18,7 +18,7 @@ namespace LojaVendeTudo.API.Service
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Login),
+                    new Claim(ClaimTypes.Name, user.Nome),
                     new Claim(ClaimTypes.Role, user.role)
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),

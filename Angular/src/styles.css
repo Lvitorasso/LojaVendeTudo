@@ -28,7 +28,6 @@ button.active:focus {
     color: white; 
     background-color: black; 
     border-color: black;
-    width: 400px;
 }
 
 /* Css para definir o tamanho padrão dos inputs do sistema*/
@@ -57,3 +56,7 @@ button.active:focus {
 
 .btn:hover {
     background-color:rgb(80, 82, 80);  }
+
+.form-floating{
+    margin-bottom: 1%;
+}

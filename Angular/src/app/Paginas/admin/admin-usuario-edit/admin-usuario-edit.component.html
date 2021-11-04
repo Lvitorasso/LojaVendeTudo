@@ -1,0 +1,145 @@
+<div class="container">
+    <form class="form-cadastro" name="login" id="login" #f="ngForm" (ngSubmit)="salvar(f.value)">
+
+      <h2>Alterar usuarios do sistema</h2>
+
+      <div class="form-floating">
+          <input [(ngModel)]="Pessoa.Nome" required type="text" class="form-control"  id="inpNome" name="Nome"
+           #_inpNome="ngModel"
+           minlength="3" 
+           maxlength="30">                
+
+          <label for="inpNome" class="sr-only ">
+              Nome
+           </label>
+       </div>
+
+      <div class="alert alert-danger err" *ngIf="!_inpNome.valid && !_inpNome.untouched">
+        <div *ngIf="_inpNome.errors?.required" >Campo obrigatorio</div>
+        <div *ngIf="_inpNome.errors?.minlength" >Tamanho minimo {{_inpNome.errors?.minlength.requiredLength}} caracteres</div>
+        <div *ngIf="_inpNome.errors?.minlength" >Tamanho maximo {{_inpNome.errors?.maxlength.requiredLength}} caracteres</div>
+      </div>
+    
+      <div class="form-floating">
+           <input [(ngModel)]="Pessoa.Sobrenome" required type="text" class="form-control"  id="inpSobreNome" name="Sobrenome"
+           #_SobreNome="ngModel"
+           minlength="3" 
+           maxlength="60">
+           <label for="inpSobreNome" class="sr-only ">
+             Sobrenome
+          </label>
+      </div>
+      <div class="alert alert-danger err" *ngIf="!_SobreNome.valid && !_SobreNome.untouched">
+        <div *ngIf="_SobreNome.errors?.required" >Campo obrigatorio</div>
+        <div *ngIf="_SobreNome.errors?.minlength" >Tamanho minimo {{_SobreNome.errors?.minlength.requiredLength}} caracteres</div>
+        <div *ngIf="_SobreNome.errors?.minlength" >Tamanho maximo {{_SobreNome.errors?.maxlength.requiredLength}} caracteres</div>
+      </div>
+    
+
+      <div class="form-floating">
+          <input  [(ngModel)]="Pessoa.Documento" required type="text" class="form-control"  id="inpDocumento" name="Documento"
+          #_Documento="ngModel"
+          minlength="3" 
+          maxlength="14">
+
+          <label for="inpDocumento" class="sr-only ">
+              Documento
+           </label>
+      </div>
+      <div class="alert alert-danger err" *ngIf="!_Documento.valid && !_Documento.untouched">
+        <div *ngIf="_Documento.errors?.required" >Campo obrigatorio</div>
+        <div *ngIf="_Documento.errors?.minlength" >Tamanho minimo {{_Documento.errors?.minlength.requiredLength}} caracteres</div>
+      </div>  
+
+      <div class="form-floating">
+           <input [(ngModel)]="Pessoa.Email" required type="text" class="form-control"  id="inpEmail" name="Email"
+           #_Email="ngModel"
+           maxlength="100">
+           <label for="inpEmail" class="sr-only ">
+             Email
+          </label>
+     </div>
+      <div class="alert alert-danger err" *ngIf="!_Email.valid && !_Email.untouched">
+        <div *ngIf="_Email.errors?.required" >Campo obrigatorio</div>
+        <div *ngIf="_Email.errors?.minlength" >Tamanho maximo {{_Email.errors?.maxlength.requiredLength}} caracteres</div>
+      </div>
+    
+      <div class="form-floating">
+          <input  [(ngModel)]="Pessoa.Telefone" required type="text" class="form-control"  id="inpTelefone" name="Telefone"
+          #_Telefone="ngModel"
+          minlength="10" 
+          maxlength="10">    
+          <label for="inpTelefone" class="sr-only ">
+              Telefone
+          </label>
+     </div>
+      <div class="alert alert-danger err" *ngIf="!_Telefone.valid && !_Telefone.untouched">
+        <div *ngIf="_Telefone.errors?.required" >Campo obrigatorio</div>
+        <div *ngIf="_Telefone.errors?.minlength" >Tamanho minimo {{_Telefone.errors?.minlength.requiredLength}} caracteres</div>
+        <div *ngIf="_Telefone.errors?.minlength" >Tamanho maximo {{_Telefone.errors?.maxlength.requiredLength}} caracteres</div>
+      </div>
+    
+      <div class="form-floating">
+           <input [(ngModel)]="Pessoa.Celular" required type="text" class="form-control"  id="inpCelular" name="Celular"
+           #_Celular="ngModel"
+           minlength="10" 
+           maxlength="10"> 
+           <label for="inpCelular" class="sr-only ">
+             Celular
+          </label>   
+      </div>
+      <div class="alert alert-danger err" *ngIf="!_Celular.valid && !_Celular.untouched">
+        <div *ngIf="_Celular.errors?.required" >Campo obrigatorio</div>
+        <div *ngIf="_Celular.errors?.minlength" >Tamanho minimo {{_Celular.errors?.minlength.requiredLength}} caracteres</div>
+        <div *ngIf="_Celular.errors?.minlength" >Tamanho maximo {{_Celular.errors?.maxlength.requiredLength}} caracteres</div>
+      </div>
+    
+      <div class="form-floating">
+        <select [(ngModel)]="Pessoa.fk_Sexo" required class="form-select" id="inpfk_sexo" 
+        #_fk_sexo="ngModel" name="fk_Sexo">
+          <option value="1">Masculino</option>
+          <option value="2">Feminino</option>
+          <option value="3">Outro</option>
+        </select>
+        <label for="inpfk_sexo">Sexo</label>
+      </div>
+    <div class="alert alert-danger err" *ngIf="!_fk_sexo.valid && !_fk_sexo.untouched">
+      <div *ngIf="_fk_sexo.errors?.required" >Campo obrigatorio</div>
+    </div>
+
+    <div class="form-floating">
+      <select [(ngModel)]="Pessoa.role" required class="form-select" id="inpRole" 
+      #_Role="ngModel" name="role">
+        <option value="admin">admin</option>
+        <option value="usuario">usuario</option>
+      </select>
+      <label for="inpRole">Permissão</label>
+    </div>
+
+    <label *ngIf="Pessoa.FlagBloqueio == 1"> Usuario BLOQUEADO</label>
+    <label *ngIf="Pessoa.FlagBloqueio == 0"> Usuario NÃO BLOQUEADO</label>
+    <input hidden ngModel="{{Pessoa.FlagBloqueio}}" type="number" id="inpFlagBloqueio" name="FlagBloqueio" class="form-control" >
+
+      <input hidden ngModel="{{Pessoa.DataNascimento}}" type="date" id="inpDataNascimento" name="DataNascimento" class="form-control" >
+      <input hidden ngModel="{{Pessoa.PessoaID}}" type="date" id="inpPessoaID" name="PessoaID" class="form-control" >
+      <input hidden ngModel="{{Pessoa.Senha}}" type="date" id="inpSenha" name="Senha" class="form-control" >
+      <input hidden ngModel="{{Pessoa.DataCriacao}}" type="date" id="inpDtCriacao" name="DataCriacao" class="form-control" >
+      <input hidden ngModel="{{Pessoa.DataUltimoLogin}}" type="date" id="inpDtUltimoLogin" name="DataUltimoLogin" class="form-control" >
+      <input hidden ngModel="{{Pessoa.FlagFornecedor}}" type="number" id="inpflagFornecedor" name="flagFornecedor" class="form-control"  >
+      <input hidden ngModel="{{Pessoa.FlagCliente}}" type="number" id="inpflagCliente" name="flagCliente" class="form-control" >
+    <div class="row">
+        <div class="col-3">
+          <button class="btn btn-primary btnStyle" type="submit" >Salvar </button>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-secondary btnStyle"  (click)="resetarSenha()" type="button">Resetar senha</button>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-secondary btnStyle"  (click)="bloqueioUsuario()" type="button">Bloquear usuario</button>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-secondary btnStyle"  routerLink="/adm/Usuarios" type="button">Cancelar</button>
+        </div>
+    </div>
+  </form>
+</div>

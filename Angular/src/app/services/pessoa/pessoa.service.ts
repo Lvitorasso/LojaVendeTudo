@@ -16,17 +16,21 @@ export class PessoaService {
     let params = new HttpParams();
     params = params.append('id', id);
     
-    return this.http.get(this.url+'/api/Pessoa/ObterPessoaPorID', {params: params}).pipe(map((response: any) => response));
+    return this.http.get(this.url+'/api/pessoas/ObterPessoaPorID', {params: params}).pipe(map((r: any)  => r));
   }
 
   getUsuarioPorName(nome: string){
     let params = new HttpParams();
     params = params.append('nome', nome);
-    return this.http.get(this.url+'/api/Pessoa/ObterPessoaPorNome', {params: params}).pipe(map((response: any) => response));
+    return this.http.get(this.url+'/api/pessoas/ObterPessoaPorNome', {params: params}).pipe(map((r: any)  => r));
   }
 
   getTodosUsuarios(){
-    return this.http.get(this.url+'/api/Pessoa/getTodosUsuarios').pipe(map((response: any) => response));
+    return this.http.get(this.url+'/api/pessoas/GetTodosUsuarios').pipe(map((r: any)  => r));
+  }
+
+  salvarPessoaPorID(pessoa: any){
+    return this.http.post(this.url+'/api/pessoas/salvarPessoaPorID/pessoa', pessoa, { observe: 'response' });
   }
 
 }
