@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-usuarios',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminUsuariosComponent implements OnInit {
 
-  constructor() { }
+    //pessoa: any[];
+
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }

@@ -1,11 +1,10 @@
-
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { localStorageService } from './localStorageService';
+import { localStorageService } from '../localStorageService';
 
 @Injectable()
-export class UsuarioService {
+export class PessoaService {
 
   constructor(private http: HttpClient, private localdb: localStorageService) {
   }

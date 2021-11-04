@@ -35,11 +35,10 @@
   <input ngModel required type="text" class="form-control inputStyle"  id="inpDocumento" name="Documento"
   #_Documento="ngModel"
   minlength="3" 
-  maxlength="20">
+  maxlength="14">
   <div class="alert alert-danger errInputStyle" *ngIf="!_Documento.valid && !_Documento.untouched">
     <div *ngIf="_Documento.errors?.required" >Campo obrigatorio</div>
     <div *ngIf="_Documento.errors?.minlength" >Tamanho minimo {{_Documento.errors?.minlength.requiredLength}} caracteres</div>
-    <div *ngIf="_Documento.errors?.minlength" >Tamanho maximo {{_Documento.errors?.maxlength.requiredLength}} caracteres</div>
   </div>
 
   <label for="inpEmail" class="sr-only lblStyle">
