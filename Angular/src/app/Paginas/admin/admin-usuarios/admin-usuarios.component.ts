@@ -9,7 +9,7 @@ import { Pessoa } from 'src/app/Modelos/Pessoa';
   styleUrls: ['./admin-usuarios.component.css']
 })
 export class AdminUsuariosComponent implements OnInit {
-  pessoas: Pessoa[] | undefined;
+  pessoas: Pessoa[];
 
   constructor(private pessService: PessoaService,
     private activatedRoute: ActivatedRoute) { 

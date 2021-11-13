@@ -26,7 +26,7 @@ export class ProdutoService {
   }
 
   getTodosProdutos(){
-    return this.http.get(this.url+'/api/Produto/GetTodosProdutos').pipe(map((r: any)  => r));
+    return this.http.get(this.url+'/api/Produto/GetTodosProdutos').pipe(map((resultado: any) => resultado));
   }
 
   salvarProdutoPorID(Produto: any){

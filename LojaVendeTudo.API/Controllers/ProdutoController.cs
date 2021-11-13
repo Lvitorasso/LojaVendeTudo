@@ -59,7 +59,7 @@ namespace LojaVendeTudo.API.Controllers
         }
 
         [HttpGet]
-        [Route("api/GetTodosProdutos")]
+        [Route("GetTodosProdutos")]
         public IActionResult GetTodosProdutos()
         {
             try
@@ -79,7 +79,7 @@ namespace LojaVendeTudo.API.Controllers
         }
 
 
-        [Route("api/CadastrarProduto")]
+        [Route("CadastrarProduto")]
         [HttpPost]
         public IActionResult CadastrarProduto(Produto produtoNovo)
         {
@@ -107,7 +107,7 @@ namespace LojaVendeTudo.API.Controllers
             }
         }
 
-        [Route("api/DeletaProdutoPorID")]
+        [Route("DeletaProdutoPorID")]
         [HttpDelete]
         public IActionResult DeletaProdutoPorID(int id)
         {

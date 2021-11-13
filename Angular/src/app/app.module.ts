@@ -1,4 +1,5 @@
-import { PedidosService } from './services/pedidos/pedidos.service';
+import { ProdutoService } from './services/produto/produto.service';
+import { PedidosService } from './services/pedido/pedido.service';
 import { PessoaService } from './services/pessoa/pessoa.service';
 import { NomeUsuarioPipe } from './Compartilhado/Pipes/nome-usuario.pipe';
 import { AdminAuthGuard } from './services/auth/admin-auth-guard.service';
@@ -18,6 +19,7 @@ import { NavbarLojaComponent } from './Compartilhado/navbar/navbar-loja.componen
 import { PropagandaSlideComponent } from './Compartilhado/Propaganda/propaganda-slide.component';
 import { FooterLojaComponent } from './Compartilhado/footer-loja/footer-loja.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminProdutosEditComponent } from './Paginas/admin/admin-produtos-edit/admin-produtos-edit.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NavbarLojaComponent,
     NomeUsuarioPipe,
     PropagandaSlideComponent,
-    FooterLojaComponent
+    FooterLojaComponent,
+    AdminProdutosEditComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AuthService,
     AuthGuard,
     AdminAuthGuard,
-    PessoaService
+    PessoaService,
+    ProdutoService
   ],
   bootstrap: [AppComponent]
 })

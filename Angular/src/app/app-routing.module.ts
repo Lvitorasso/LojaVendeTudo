@@ -1,4 +1,4 @@
-import { AdminUsuarioEditComponent } from './Paginas/admin/admin-usuario-edit/admin-usuario-edit.component';
+import { AdminUsuarioEditComponent } from './Paginas/admin/admin-usuarios-edit/admin-usuarios-edit.component';
 import { AdminUsuariosComponent } from './Paginas/admin/admin-usuarios/admin-usuarios.component';
 import { AdminPedidosComponent } from './Paginas/admin/admin-pedidos/admin-pedidos.component';
 import { AdminProdutosComponent } from './Paginas/admin/admin-produtos/admin-produtos.component';

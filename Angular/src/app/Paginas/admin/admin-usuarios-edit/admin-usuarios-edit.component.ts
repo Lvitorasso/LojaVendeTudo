@@ -1,4 +1,4 @@
-import { PessoaService } from './../../../services/pessoa/pessoa.service';
+import { PessoaService } from '../../../services/pessoa/pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -6,9 +6,9 @@ import { formatDate } from '@angular/common';
 import { first, take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-admin-usuario-edit',
-  templateUrl: './admin-usuario-edit.component.html',
-  styleUrls: ['./admin-usuario-edit.component.css']
+  selector: 'app-admin-usuarios-edit',
+  templateUrl: './admin-usuarios-edit.component.html',
+  styleUrls: ['./admin-usuarios-edit.component.css']
 })
 export class AdminUsuarioEditComponent implements OnInit {
   Pessoa: any = {};

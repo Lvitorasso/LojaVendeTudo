@@ -1,4 +1,4 @@
-<!-- <div class="container">    
+<div class="container">    
   <h2>Produtos do sistema</h2>
   <table class="table">
     <thead>
@@ -6,20 +6,18 @@
         <th scope="col"></th>
         <th scope="col">ID</th>
         <th scope="col">Nome</th>
-        <th scope="col">Sobrenome</th>
-        <th scope="col">login</th>
-        <th scope="col">Data de Nasc.</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Preco</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let pessoa of pessoas">
-        <td><a [routerLink]="['/adm/Usuarios/', pessoa.PessoaID]">Editar</a></td>
-        <td>{{pessoa.PessoaID}}</td>
-        <td>{{pessoa.Nome}}</td>
-        <td>{{pessoa.Sobrenome}}</td>
-        <td>{{pessoa.Login}}</td>
-        <td>{{pessoa.DataNascimento}}</td>
+      <tr *ngFor="let produto of produtos">
+        <td><a [routerLink]="['/adm/Produtos/', produto.ProdutoID]">Editar</a></td>
+        <td>{{produto.ProdutoID}}</td>
+        <td>{{produto.Nome}}</td>
+        <td>{{produto.Marca}}</td>
+        <td>{{produto.PrecoUnitario}}</td>
       </tr>
     </tbody>
   </table>
-</div> -->
+</div>
