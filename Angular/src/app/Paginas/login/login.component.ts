@@ -3,7 +3,7 @@ import { delay, map } from 'rxjs/operators';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { tick } from '@angular/core/testing';
 
 @Component({
@@ -46,16 +46,16 @@ export class LoginComponent implements OnInit {
   }
 
  logarGoogle(){   
-    this.authService.logarGoogle();
-
-    // if (this.authService.estaLogado()){
-    //   let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-    //   this.router.navigate([returnUrl || '/']);
-      
-    // }
-    // else  {
-    //   this.invalidLogin = true; 
-    // }
+     this.authService.logarGoogle().subscribe(result => { 
+       console.log("RESULTTTTTTTTT" + result)
+      if (result){
+        let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+        this.router.navigate([returnUrl || '/']);
+      }
+      else  {
+        this.invalidLogin = true; 
+      }
+    });
   }
 
   deslogarGoogle(){

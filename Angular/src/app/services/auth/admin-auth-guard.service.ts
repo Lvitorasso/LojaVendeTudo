@@ -1,4 +1,4 @@
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { jsonpFactory } from '@angular/http/src/http_module';

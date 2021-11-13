@@ -2,8 +2,8 @@ import { AdminUsuarioEditComponent } from './Paginas/admin/admin-usuario-edit/ad
 import { AdminUsuariosComponent } from './Paginas/admin/admin-usuarios/admin-usuarios.component';
 import { AdminPedidosComponent } from './Paginas/admin/admin-pedidos/admin-pedidos.component';
 import { AdminProdutosComponent } from './Paginas/admin/admin-produtos/admin-produtos.component';
-import { AdminAuthGuard } from './services/admin-auth-guard.service';
-import { AuthGuard } from './services/auth-guard.service';
+import { AdminAuthGuard } from './services/auth/admin-auth-guard.service';
+import { AuthGuard } from './services/auth/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Paginas/home/home.component';
@@ -26,8 +26,8 @@ const routes: Routes = [
       { path: 'checkOut', component: CheckOutComponent },
       { path: 'compraFinalizada', component: CompraFinalizadaComponent },
       { path: 'minhas/Compras', component: MinhasComprasComponent },
-      { path: 'adm/Pedidos', component: AdminProdutosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'adm/Produtos', component: AdminPedidosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'adm/Pedidos', component:  AdminPedidosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'adm/Produtos', component: AdminProdutosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'adm/Usuarios/:id', component: AdminUsuarioEditComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'adm/Usuarios', component: AdminUsuariosComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'no-access', component: NoAccessComponent }

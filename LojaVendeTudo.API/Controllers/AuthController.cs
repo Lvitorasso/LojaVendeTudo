@@ -13,20 +13,6 @@ namespace LojaVendeTudo.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        // GET: api/<ValuesController1>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<ValuesController1>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<ValuesController1>
         [Route("/api/authenticate/logar")]
         [HttpPost]

@@ -1,13 +1,13 @@
-import { PessoaService } from './pessoa/pessoa.service';
+import { PessoaService } from './../pessoa/pessoa.service';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Observable, of, ReplaySubject, throwError  } from 'rxjs';
-import { BadRequestError } from './../Compartilhado/Erros/bad-request-error';
-import { AppError } from './../Compartilhado/Erros/app-error';
-import { NotFoundError } from './../Compartilhado/Erros/not-found-error';
-import { localStorageService } from './localStorageService';
+import { BadRequestError } from './../../Compartilhado/Erros/bad-request-error';
+import { AppError } from './../../Compartilhado/Erros/app-error';
+import { NotFoundError } from './../../Compartilhado/Erros/not-found-error';
+import { localStorageService } from './../localStorageService';
 
 @Injectable()
 export class AuthService {
@@ -57,27 +57,54 @@ export class AuthService {
       }, catchError(this.handleError)));
   }
   
-  logarGoogle(){ 
-    let promise =  new Promise<boolean>((resolve, reject) => {
-       this.auth2.signIn({ 
-        scope: 'https://www.googleapis.com/auth/gmail.readonly'
-      }).then( (user:any) => {
-        this.subject.next(user);
+//   logarGoogle(){ 
+//     let promise =  new Promise<boolean>((resolve, reject) => {
+//        this.auth2.signIn({ 
+//         scope: 'https://www.googleapis.com/auth/gmail.readonly'
+//       }).then( (user:any) => {
+//         this.subject.next(user);
   
-        this.localdb.set('token', user.getAuthResponse().access_token);
-        this.localdb.set('usuario', user.getBasicProfile().getName());     
+//         this.localdb.set('token', user.getAuthResponse().access_token);
+//         this.localdb.set('usuario', user.getBasicProfile().getName());     
     
-        console.log("loguei ok")
+//         console.log("loguei ok")
         
-        return true;     
-      })
+//         return true;     
+//       })
 
-      console.log("não loguei ok")
-      return false; 
-    })
+//       console.log("não loguei ok")
+//       return false; 
+//     })
     
-    return promise;
- }
+//     return promise;
+//  }
+
+logarGoogle(){ 
+       const resp = of(this.auth2.signIn({ 
+         scope: 'https://www.googleapis.com/auth/gmail.readonly'
+       }).then( (user:any) => {
+                this.subject.next(user);
+    
+                //this.localdb.set('token', user.getAuthResponse().access_token);
+                this.localdb.set('usuario', user.getBasicProfile().getName());   
+                
+               let t = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvamFWZW5kZVR1ZG8iLCJyb2xlIjoiYWRtaW4iLCJuYmYiOjE2MzYyMDQ3NjMsImV4cCI6MTYzNjIxMTk2MywiaWF0IjoxNjM2MjA0NzYzfQ.meGsdEicab_LqrGPEIY63UzeBSIGWxsrncTZ_dB5Nc0";
+               this.localdb.set('token', t);
+
+               
+              })).pipe(map((response: any) => {
+        console.log(response)
+            if(response)
+            {  
+              return true;
+            }
+          
+            return false; 
+       }, catchError(this.handleError)))
+
+       
+       return resp;
+  }
 
   deslogar() { 
     this.localdb.remove('token');

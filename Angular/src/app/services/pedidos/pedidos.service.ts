@@ -2,10 +2,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { localStorageService } from './localStorageService';
+import { localStorageService } from '../localStorageService';
 
 @Injectable()
-export class OrderService {
+export class PedidosService {
   constructor(private http: HttpClient, private localdb: localStorageService) {
   }
 

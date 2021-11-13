@@ -11,7 +11,7 @@ import { first, take } from 'rxjs/operators';
   styleUrls: ['./admin-usuario-edit.component.css']
 })
 export class AdminUsuarioEditComponent implements OnInit {
-  Pessoa: any
+  Pessoa: any = {};
   id: any;
   invalid: any; 
 

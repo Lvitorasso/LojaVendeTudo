@@ -99,10 +99,10 @@ namespace LojaVendeTudo.API.Controllers
         {
             try
             {
-                if (pessoa.PessoaID <= 0)
+                if (pessoa == null)
                     return Ok("O parametro pessoa é obrigatorio");
 
-                if (pessoa == null)
+                if (pessoa.PessoaID <= 0)
                     return Ok("O parametro pessoa é obrigatorio");
 
                 pessoa.Atualizar(pessoa.PessoaID);

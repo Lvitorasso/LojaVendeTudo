@@ -1,3 +1,5 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { Produto } from './../../../Modelos/produto';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-produtos.component.css']
 })
 export class AdminProdutosComponent implements OnInit {
+produtos: Produto[] | undefined;
 
-  constructor() { }
+  constructor(private route: Router,  private activatedRoute: ActivatedRoute) { 
+
+  }
 
   ngOnInit(): void {
   }

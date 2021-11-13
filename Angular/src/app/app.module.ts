@@ -1,7 +1,8 @@
+import { PedidosService } from './services/pedidos/pedidos.service';
 import { PessoaService } from './services/pessoa/pessoa.service';
 import { NomeUsuarioPipe } from './Compartilhado/Pipes/nome-usuario.pipe';
-import { AdminAuthGuard } from './services/admin-auth-guard.service';
-import { AuthGuard } from './services/auth-guard.service';
+import { AdminAuthGuard } from './services/auth/admin-auth-guard.service';
+import { AuthGuard } from './services/auth/auth-guard.service';
 import { localStorageService } from './services/localStorageService';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,8 +11,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { OrderService } from './services/order.service';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './services/auth/auth.service';
 import {  HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarLojaComponent } from './Compartilhado/navbar/navbar-loja.component';
@@ -41,7 +41,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule
   ],
   providers: [
-    OrderService,
+    PedidosService,
     localStorageService,
     AuthService,
     AuthGuard,

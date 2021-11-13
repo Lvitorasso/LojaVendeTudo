@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from 'src/app/services/order.service';
+import { PedidosService } from 'src/app/services/pedidos/pedidos.service';
 
 @Component({
   selector: 'app-admin-pedidos',
@@ -9,7 +9,7 @@ import { OrderService } from 'src/app/services/order.service';
 export class AdminPedidosComponent implements OnInit {
   orders: any;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: PedidosService) { }
 
   ngOnInit() {
     this.orderService.getOrders()

@@ -1,6 +1,7 @@
 import { PessoaService } from './../../../services/pessoa/pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Pessoa } from 'src/app/Modelos/Pessoa';
 
 @Component({
   selector: 'app-admin-usuarios',
@@ -8,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./admin-usuarios.component.css']
 })
 export class AdminUsuariosComponent implements OnInit {
-  pessoas: any[];
+  pessoas: Pessoa[] | undefined;
 
   constructor(private pessService: PessoaService,
     private activatedRoute: ActivatedRoute) { 
