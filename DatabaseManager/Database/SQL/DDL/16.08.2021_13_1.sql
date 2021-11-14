@@ -10,6 +10,7 @@ begin
 		Peso varchar(50) not null,
 		PrecoUnitario numeric(12,8) not null,
 		fk_Fornecedor int not null,
+		fk_Categoria int not null,
 		primary key(ProdutoID)
 	)
 end

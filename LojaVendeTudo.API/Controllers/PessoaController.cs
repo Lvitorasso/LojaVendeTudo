@@ -40,6 +40,29 @@ namespace LojaVendeTudo.API.Controllers
         }
 
         [HttpGet]
+        [Route("/api/pessoas/getTodosFornecedores")]
+        public IActionResult getTodosFornecedores()
+        {
+            try
+            {
+                Pessoa pessoa = new Pessoa();
+                ArrayList arr = pessoa.SelecionarTodos("flagFornecedor = 1");
+
+                if (arr.Count <= 0)
+                    return Ok("Nenhuma pessoa encontrada");
+
+                var arrPessoaJson = JsonConvert.SerializeObject(arr, Formatting.Indented);
+
+                return Ok(arrPessoaJson);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("/api/pessoas/ObterPessoaPorID")]
         public IActionResult ObterPessoaPorID(int id)
         {

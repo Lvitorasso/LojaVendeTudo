@@ -1,1 +1,114 @@
-<p>admin-produtos-edit works!</p>
+<div class="container">
+    <h2>Produtos</h2>
+    <form class="form-cadastro-produtos" name="produto" id="tmpproduto" #f="ngForm" (ngSubmit)="salvar(f.value)">
+        <div class="row">
+            <div class="col-8">
+                <div class="form-floating">
+                    <input [(ngModel)]="produto.Nome" required type="text" class="form-control"  id="inpNome" name="Nome"
+                     #_inpNome="ngModel"
+                     minlength="3" 
+                     maxlength="50">                
+                
+                    <label for="inpNome" class="sr-only ">
+                        Nome
+                     </label>
+                 </div>
+
+                 <div class="form-floating">
+                    <input [(ngModel)]="produto.Descricao" required type="text" class="form-control"  id="inpDescricao" name="Descricao"
+                     #_inpDescricao="ngModel"
+                     minlength="3" 
+                     maxlength="200">                
+                
+                    <label for="inpDescricao" class="sr-only ">
+                        Descricao
+                     </label>
+                 </div>
+
+                 <div class="form-floating">
+                    <input [(ngModel)]="produto.Marca" required type="text" class="form-control"  id="inpMarca" name="Marca"
+                     #_inpMarca="ngModel"
+                     minlength="3" 
+                     maxlength="50">                
+                
+                    <label for="inpMarca" class="sr-only ">
+                        Marca
+                     </label>
+                 </div>
+
+                 <div class="form-floating">
+                    <input [(ngModel)]="produto.Fabricante" required type="text" class="form-control"  id="inpFabricante" name="Fabricante"
+                     #_inpFabricante="ngModel"
+                     minlength="3" 
+                     maxlength="50">                
+                
+                    <label for="inFabricante" class="sr-only ">
+                        Fabricante
+                     </label>
+                 </div>
+
+                 <div class="form-floating">
+                    <input [(ngModel)]="produto.Peso" required type="text" class="form-control"  id="inpPeso" name="Peso"
+                     #_inpPeso="ngModel"
+                     minlength="2" 
+                     maxlength="20">                
+                
+                    <label for="inpPeso" class="sr-only ">
+                        Peso
+                     </label>
+                 </div>
+
+                 <div class="form-floating">
+                    <input [(ngModel)]="produto.PrecoUnitario" required type="text" class="form-control"  id="inpPrecoUnitario" name="PrecoUnitario"
+                     #_inpPrecoUnitario="ngModel"
+                     minlength="3" 
+                     maxlength="10">                
+                
+                    <label for="inpPrecoUnitario" class="sr-only ">
+                        Preço Unitario
+                     </label>
+                 </div>
+
+                 <div class="form-floating">
+                    <select [(ngModel)]="produto.fk_Fornecedor" required class="form-select" id="floatingSelectGrid" 
+                    #_fk_fornecedor="ngModel" name="fk_Fornecedor" id="inpfk_fornecedor">
+                      <option selected></option>
+                      <option *ngFor="let fornecedor of fornecedores" [value]="fornecedor.PessoaID">{{fornecedor.Nome}}</option>
+                    </select>
+                    <label for="floatingSelectGrid">Fornecedor</label>
+                  </div>
+
+                  <div class="form-floating">
+                    <select [(ngModel)]="produto.fk_Categoria" required class="form-select" id="floatingSelectGrid" 
+                    #_fk_Categoria="ngModel" name="fk_Categoria" id="inpfk_Categoria">
+                      <option selected></option>
+                      <option *ngFor="let categoria of categorias" [value]="categoria.CategoriaID">{{categoria.Descricao}}</option>
+                    </select>
+                    <label for="floatingSelectGrid">Categoria</label>
+                  </div>
+
+                 <div class="form-floating">
+                    <input [(ngModel)]="produto.ImgSrc" required type="text" class="form-control"  id="inpImgSrc" name="ImgSrc"
+                     #_inpImgSrc="ngModel"
+                     minlength="3" 
+                     maxlength="200">                
+                
+                    <label for="inpImgSrc" class="sr-only ">
+                        Imagem
+                     </label>
+                 </div>
+            </div>
+            <div class="col-4">
+                <produto-card [produto]="this.produto"></produto-card>
+           </div>
+        </div>     
+        <div class="row">
+            <div class="col-1">
+              <button class="btn btn-primary btnStyle" type="submit" >Salvar </button>
+            </div>
+            <div class="col-1">
+              <button class="btn btn-secondary btnStyle"  routerLink="/adm/Produtos" type="button">Cancelar</button>
+            </div>
+        </div>
+    </form>       
+</div>

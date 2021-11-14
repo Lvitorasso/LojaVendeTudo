@@ -16,7 +16,7 @@ export class ProdutoService {
     let params = new HttpParams();
     params = params.append('id', id);
     
-    return this.http.get(this.url+'/api/Produto/ObterProdutoPorID', {params: params}).pipe(map((r: any)  => r));
+    return this.http.get(this.url+'/api/Produto/ObterProdutoPorID/id', {params: params}).pipe(map((r: any)  => r));
   }
 
   getProdutoPorName(nome: string){
@@ -27,6 +27,10 @@ export class ProdutoService {
 
   getTodosProdutos(){
     return this.http.get(this.url+'/api/Produto/GetTodosProdutos').pipe(map((resultado: any) => resultado));
+  }
+
+  getTodasCategorias(){
+    return this.http.get(this.url+'/api/Produto/getTodasCategorias').pipe(map((resultado: any) => resultado));
   }
 
   salvarProdutoPorID(Produto: any){

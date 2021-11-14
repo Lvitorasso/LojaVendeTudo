@@ -14,6 +14,8 @@ namespace LojaVendeTudo.API.Models
 	    public string Fabricante { get; set; }
 	    public string Peso { get; set; }
 	    public decimal PrecoUnitario { get; set; }
-	    public int fk_Fornecedor { get; set; }
+        public string ImgSrc { get; set; }
+        public int fk_Fornecedor { get; set; }
+        public int fk_Categoria { get; set; }
     }
 }

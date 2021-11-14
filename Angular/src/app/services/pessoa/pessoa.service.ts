@@ -29,6 +29,10 @@ export class PessoaService {
     return this.http.get(this.url+'/api/pessoas/GetTodosUsuarios').pipe(map((r: any)  => r));
   }
 
+  getTodosFornecedores(){
+    return this.http.get(this.url+'/api/pessoas/getTodosFornecedores').pipe(map((r: any)  => r));
+  }
+
   salvarPessoaPorID(pessoa: any){
     return this.http.post(this.url+'/api/pessoas/salvarPessoaPorID/pessoa', pessoa, { observe: 'response' });
   }

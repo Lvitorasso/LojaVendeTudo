@@ -1,0 +1,9 @@
+ <div *ngIf="produto.Nome" class="card" style="width: 15rem;" >
+    <img class="card-img-top" [src]="produto.ImgSrc" *ngIf="produto.ImgSrc" style="width: 13rem; height: 200px; margin-left: 1rem; margin-right: 1rem;">
+    <div class="card-body">
+      <h4 class="card-title"><b>{{produto.Nome}}</b></h4>      
+      <p class="card-text">R$ {{produto.PrecoUnitario}}</p>
+      <!-- <p class="card-text">{{produto.Descricao}}</p> -->
+      <button class="btn btn-primary" *ngIf="this.botao && !this.jaAdicionado"> Adicionar ao carrinho </button>
+    </div>
+  </div> 

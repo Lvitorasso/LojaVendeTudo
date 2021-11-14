@@ -1,6 +1,7 @@
 ﻿using LojaVendeTudo.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 
 namespace LojaVendeTudo.API.Repositorios
 {
@@ -47,14 +48,15 @@ namespace LojaVendeTudo.API.Repositorios
             }
         }
 
-        public Produto ObterPorID(int id)
+        public Produto ObterProdutoPorID(int id)
         {
             try
             {
                 Produto prod = new Produto();
 
-                prod.Selecionar(id);
+                prod = (Produto)prod.Selecionar(id);
 
+                
                 return prod;
             }
             catch(Exception e)
@@ -64,13 +66,13 @@ namespace LojaVendeTudo.API.Repositorios
             }
         }
 
-        public Produto ObterPorNome(string nome)
+        public Produto ObterProdutoPorNome(string nome)
         {
             try
             {
                 Produto prod = new Produto();
 
-                prod.Selecionar(nome);
+                prod.Selecionar("nome = '" + nome + "'");
 
                 return prod;
             }
@@ -101,6 +103,55 @@ namespace LojaVendeTudo.API.Repositorios
             }
         }
 
+        public ArrayList ObterTodasCategorias()
+        {
+            try
+            {
+                Categoria categoria = new Categoria();
+                ArrayList arrCat = categoria.SelecionarTodos();
+
+                return arrCat;
+            }
+            catch (Exception e)
+            {
+                // MELHORAR EXCEÇÕES 
+                throw e;
+            }
+        }
+
+        public Categoria ObterCategoriaPorID(int id)
+        {
+            try
+            {
+                Categoria categoria = new Categoria();
+
+                categoria = (Categoria)categoria.Selecionar(id);
+
+                return categoria;
+            }
+            catch (Exception e)
+            {
+                // MELHORAR EXCEÇÕES 
+                throw e;
+            }
+        }
+
+        public Categoria ObterCategoriaPorNome(string nome)
+        {
+            try
+            {
+                Categoria categoria = new Categoria();
+
+                categoria.Selecionar("descricao = '"+nome+"'");
+
+                return categoria;
+            }
+            catch (Exception e)
+            {
+                // MELHORAR EXCEÇÕES 
+                throw e;
+            }
+        }
 
     }
 }

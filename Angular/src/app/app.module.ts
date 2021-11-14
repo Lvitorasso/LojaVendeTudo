@@ -1,3 +1,4 @@
+import { TiraVirgulaPipe } from './Compartilhado/Pipes/tiraVirgula.pipe';
 import { ProdutoService } from './services/produto/produto.service';
 import { PedidosService } from './services/pedido/pedido.service';
 import { PessoaService } from './services/pessoa/pessoa.service';
@@ -20,6 +21,7 @@ import { PropagandaSlideComponent } from './Compartilhado/Propaganda/propaganda-
 import { FooterLojaComponent } from './Compartilhado/footer-loja/footer-loja.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminProdutosEditComponent } from './Paginas/admin/admin-produtos-edit/admin-produtos-edit.component';
+import { ProdutoCardComponent } from './Compartilhado/produto-card/produto-card.component';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { AdminProdutosEditComponent } from './Paginas/admin/admin-produtos-edit/
     NomeUsuarioPipe,
     PropagandaSlideComponent,
     FooterLojaComponent,
-    AdminProdutosEditComponent
+    ProdutoCardComponent,
+    TiraVirgulaPipe
   ],
   imports: [
     BrowserModule,

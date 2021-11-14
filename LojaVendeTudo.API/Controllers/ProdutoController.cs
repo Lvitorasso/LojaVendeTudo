@@ -18,7 +18,8 @@ namespace LojaVendeTudo.API.Controllers
 
         private ProdutoRepositorio repo = new ProdutoRepositorio();
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("/api/Produto/ObterProdutoPorID/id")]
         public IActionResult ObterProdutoPorID(int id)
         {
             Produto produto = new Produto();
@@ -27,7 +28,7 @@ namespace LojaVendeTudo.API.Controllers
                 return BadRequest(new { message = "O id é obrigatorio, por favor ajustar a requisição." });
 
 
-            produto = repo.ObterPorID(id);
+            produto = repo.ObterProdutoPorID(id);
 
             if(produto.ProdutoID <= 0)
                 return Ok(new { message = "Produto não encontrado" });
@@ -38,7 +39,8 @@ namespace LojaVendeTudo.API.Controllers
             return Ok(produtoJson);
         }
 
-        [HttpGet("{nome}")]
+        [HttpGet]
+        [Route("/api/Produto/ObterProdutoPorNome/nome")]
         public IActionResult ObterProdutoPorNome(string nome)
         {
             Produto produto = new Produto();
@@ -47,7 +49,7 @@ namespace LojaVendeTudo.API.Controllers
                 return BadRequest(new { message = "O nome é obrigatorio, por favor ajustar a requisição." });
 
 
-            produto = repo.ObterPorNome(nome);
+            produto = repo.ObterProdutoPorNome(nome);
 
             if (produto.ProdutoID <= 0)
                 return Ok(new { message = "Produto não encontrado" });
@@ -59,7 +61,7 @@ namespace LojaVendeTudo.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetTodosProdutos")]
+        [Route("/api/Produto/GetTodosProdutos")]
         public IActionResult GetTodosProdutos()
         {
             try
@@ -79,8 +81,8 @@ namespace LojaVendeTudo.API.Controllers
         }
 
 
-        [Route("CadastrarProduto")]
         [HttpPost]
+        [Route("/api/Produto/CadastrarProduto/produto")]
         public IActionResult CadastrarProduto(Produto produtoNovo)
         {
             try
@@ -107,8 +109,8 @@ namespace LojaVendeTudo.API.Controllers
             }
         }
 
-        [Route("DeletaProdutoPorID")]
         [HttpDelete]
+        [Route("/api/Produto/DeletaProdutoPorID/id")]
         public IActionResult DeletaProdutoPorID(int id)
         {
             try
@@ -124,6 +126,7 @@ namespace LojaVendeTudo.API.Controllers
         }
 
         [HttpPost]
+        [Route("/api/Produto/SalvarProdutoPorID/Produto")]
         public IActionResult salvarProdutoPorID(Produto produto)
         {
             try
@@ -132,9 +135,9 @@ namespace LojaVendeTudo.API.Controllers
                     return Ok("O parametro pessoa é obrigatorio");
 
                 if (produto.ProdutoID <= 0)
-                    return Ok("O parametro pessoa é obrigatorio");
-
-                repo.AtualizarProduto(produto);
+                    repo.cadastrarProdutoNovo(produto);
+                else
+                    repo.AtualizarProduto(produto);
 
                 return Ok();
             }
@@ -142,6 +145,67 @@ namespace LojaVendeTudo.API.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpGet]
+        [Route("/api/Produto/getTodasCategorias")]
+        public IActionResult getTodasCategorias()
+        {
+            try
+            {
+                var arrCats = repo.ObterTodasCategorias();
+
+                var CategoriasJson = JsonConvert.SerializeObject(arrCats, Formatting.Indented);
+
+                return Ok(CategoriasJson);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("/api/Produto/ObterCategoriaPorID/id")]
+        public IActionResult ObterCategoriaPorID(int id)
+        {
+            Categoria categoria = new Categoria();
+
+            if (id <= 0)
+                return BadRequest(new { message = "O id é obrigatorio, por favor ajustar a requisição." });
+
+
+            categoria = repo.ObterCategoriaPorID(id);
+
+            if (categoria.CategoriaID <= 0)
+                return Ok(new { message = "Categoria não encontrada" });
+
+
+            var categoriaJson = JsonConvert.SerializeObject(categoria, Formatting.Indented);
+
+            return Ok(categoriaJson);
+        }
+
+        [HttpGet]
+        [Route("/api/Produto/ObterCategoriaPorNome/nome")]
+        public IActionResult ObterCategoriaPorNome(string nome)
+        {
+            Categoria categoria = new Categoria();
+
+            if (nome == null || nome == "" || nome == String.Empty)
+                return BadRequest(new { message = "O nome é obrigatorio, por favor ajustar a requisição." });
+
+
+            categoria = repo.ObterCategoriaPorNome(nome);
+
+            if (categoria.CategoriaID <= 0)
+                return Ok(new { message = "Categoria não encontrada" });
+
+
+            var categoriaJson = JsonConvert.SerializeObject(categoria, Formatting.Indented);
+
+            return Ok(categoriaJson);
         }
 
     }

@@ -8,4 +8,11 @@ begin
 		Add constraint fk_Produto_Pessoa foreign key (fk_Fornecedor) references dbo.Pessoa(PessoaID)
 	end
 
+
+	if not exists (select 1 from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where TABLE_NAME = 'Produto' 
+	and CONSTRAINT_NAME = 'fk_Produto_Categoria' and TABLE_SCHEMA = 'dbo')
+	begin 
+		Alter table dbo.Produto
+		Add constraint fk_Produto_Categoria foreign key (fk_Categoria) references dbo.Categoria(CategoriaID)
+	end
 end

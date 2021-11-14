@@ -70,6 +70,46 @@ namespace DatabaseManager.Acessos
             }            
         }
 
+        public ArrayList SelecionarTodos(string where)
+        {
+            try
+            {
+                string comando = GeraComando(this, SELECT_TODOS, 0, where);
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = this.Conectar();
+                cmd.CommandText = comando;
+
+                ArrayList arr = new ArrayList();
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    var obj = Activator.CreateInstance(this.GetType());
+
+                    foreach (var i in this.GetType().GetProperties())
+                    {
+                        if (i.GetCustomAttributes(typeof(IgnorarDB), false).Length > 0)
+                            continue;
+
+                        obj.GetType().GetProperty($"{i.Name}").SetValue(obj, dr[$"{i.Name}"]);
+                    }
+
+                    arr.Add(obj);
+                }
+
+                if (cmd.Connection != null && cmd.Connection.State == ConnectionState.Open)
+                    cmd.Connection.Close();
+
+                return arr;
+            }
+            catch (Exception e)
+            {
+                // MELHORAR EXCEÇÕES 
+                throw e;
+            }
+        }
+
 
         // Create a value of the required type
         static object InstanciaPeloTipo(Type t)
@@ -279,7 +319,7 @@ namespace DatabaseManager.Acessos
                     comando = GeraUpdate(this, id);
                     break;
                 case SELECT_TODOS:
-                    comando = GeraSelectTodos(this);
+                    comando = GeraSelectTodos(this, where);
                     break;
             }
 
@@ -309,7 +349,7 @@ namespace DatabaseManager.Acessos
                     else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int e long não precisa de tratamento
                         _values += $" {item.Name} = {item.GetValue(obj)}";
                     else if (item.PropertyType.Name.Equals("Double") || item.PropertyType.Name.Equals("Decimal"))
-                        _values += $" {item.Name} = {Convert.ToDouble(item.GetValue(obj).ToString().Replace(",","."))}";
+                        _values += $" {item.Name} = {item.GetValue(obj).ToString().Replace(",",".")}";
                     else if (item.PropertyType.Name.Equals("DateTime")) // date time 
                         _values += $" {item.Name} = \'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd")}\'";
                 }
@@ -324,7 +364,7 @@ namespace DatabaseManager.Acessos
                     else if (item.PropertyType.Name.Equals("Int32") || item.PropertyType.Name.Equals("Int64")) // int e long não precisa de tratamento
                         _values += $" ,{item.Name} = {item.GetValue(obj)}";
                     else if (item.PropertyType.Name.Equals("Double") || item.PropertyType.Name.Equals("Decimal"))
-                        _values += $" ,{item.Name} = {Convert.ToDouble(item.GetValue(obj).ToString().Replace(",", "."))}";
+                        _values += $" ,{item.Name} = {item.GetValue(obj).ToString().Replace(",", ".")}";
                     else if (item.PropertyType.Name.Equals("DateTime"))
                         _values += $" ,{item.Name} =\'{Convert.ToDateTime(item.GetValue(obj)).ToString("yyyy/MM/dd").Replace("/", "")}\'";
                 }
@@ -356,9 +396,16 @@ namespace DatabaseManager.Acessos
             return select;
         }
 
-        private string GeraSelectTodos(object obj)
+        private string GeraSelectTodos(object obj, string where = null)
         {
             string select = $"select * from {this.GetType().Name}";
+
+            if (where != null)
+            {
+                select += " where ";
+                select += where;
+            }
+
             return select;
         }
 

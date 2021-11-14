@@ -1,5 +1,6 @@
 <div class="container">    
   <h2>Produtos do sistema</h2>
+  <button class="btn btn-primary" routerLink="/adm/ProdutosNew"> NOVO </button>
   <table class="table">
     <thead>
       <tr>
@@ -12,7 +13,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let produto of produtos">
-        <td><a [routerLink]="['/adm/Produtos/', produto.ProdutoID]">Editar</a></td>
+        <td><a [routerLink]="['/adm/ProdutosEdit/', produto.ProdutoID]">Editar</a></td>
         <td>{{produto.ProdutoID}}</td>
         <td>{{produto.Nome}}</td>
         <td>{{produto.Marca}}</td>
