@@ -1,9 +1,15 @@
- <div *ngIf="produto.Nome" class="card" style="width: 15rem;" >
-    <img class="card-img-top" [src]="produto.ImgSrc" *ngIf="produto.ImgSrc" style="width: 13rem; height: 200px; margin-left: 1rem; margin-right: 1rem;">
+ <div *ngIf="produto.Nome" class="card" style="width: 15rem; border: none;" >
+    <img class="card-img-top" [src]="produto.ImgSrc" *ngIf="produto.ImgSrc" style="width: 13rem; height: 200px; margin-left: 1rem; margin-right: 1rem">
     <div class="card-body">
       <h4 class="card-title"><b>{{produto.Nome}}</b></h4>      
       <p class="card-text">R$ {{produto.PrecoUnitario}}</p>
-      <!-- <p class="card-text">{{produto.Descricao}}</p> -->
-      <button class="btn btn-primary" *ngIf="this.botao && !this.jaAdicionado"> Adicionar ao carrinho </button>
+      <button class="btn btn-outline-dark wrapper" (click)="adicionar()" *ngIf="this.botao && !this.jaAdicionado"> Adicionar ao carrinho </button>
+
+      <div class="btn-group" role="group"  *ngIf="this.botao && this.jaAdicionado">
+        <button type="button" (click)="diminuirQtd()" class="btn btn-outline-dark wrapper">-</button>
+        <button type="button" class="btn btn-outline-dark wrapper">{{this.qtd}}</button>
+        <button type="button" (click)="aumentarQtd()" class="btn btn-outline-dark wrapper">+</button>
+      </div>
+      
     </div>
   </div> 

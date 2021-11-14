@@ -1,0 +1,6 @@
+.right{
+    display : flex;
+    justify-content : left;
+	flex-wrap: wrap;
+    max-width: 80rem;
+  }

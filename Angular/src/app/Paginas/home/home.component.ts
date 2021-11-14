@@ -1,3 +1,4 @@
+import { take } from 'rxjs/operators';
 import { ProdutoService } from './../../services/produto/produto.service';
 import { Produto } from 'src/app/Modelos/produto';
 
@@ -11,13 +12,10 @@ import { localStorageService } from 'src/app/services/localStorageService';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-produtos: any
+
 
   constructor(public authService: AuthService, private localdb: localStorageService,
     private prodService: ProdutoService) { 
-      prodService.getTodosProdutos().subscribe(resultadoAPI => {
-        this.produtos = resultadoAPI;
-      })
   }
 
  logout(){

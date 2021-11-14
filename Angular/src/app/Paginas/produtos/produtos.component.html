@@ -1,15 +1,15 @@
-<div class="card" style="width: 18rem;">
-    <img src="https://dummyimage.com/286x286/000/fff" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Azeitona</h5>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">An item</li>
-      <li class="list-group-item">A second item</li>
-      <li class="list-group-item">A third item</li>
-    </ul>
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
+<br>
+<br>
+<div class="container-fluid" >
+  <div class="row">
+      <div class="offset-1 col-sm-2 left">
+          <filtro-produto [categoria]="this.categoria"></filtro-produto>
+      </div>    
+      <div class="col-sm-8 right" >       
+          <ng-container *ngFor="let produto of produtos"> 
+                          <produto-card  [produto]="produto"
+                          [botao]="true"></produto-card>  
+          </ng-container>
+      </div>
   </div>
+</div>

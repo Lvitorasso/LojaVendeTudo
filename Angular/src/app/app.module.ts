@@ -22,6 +22,7 @@ import { FooterLojaComponent } from './Compartilhado/footer-loja/footer-loja.com
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminProdutosEditComponent } from './Paginas/admin/admin-produtos-edit/admin-produtos-edit.component';
 import { ProdutoCardComponent } from './Compartilhado/produto-card/produto-card.component';
+import { FiltroProdutoComponent } from './Compartilhado/filtro-produto/filtro-produto.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { ProdutoCardComponent } from './Compartilhado/produto-card/produto-card.
     PropagandaSlideComponent,
     FooterLojaComponent,
     ProdutoCardComponent,
-    TiraVirgulaPipe
+    TiraVirgulaPipe,
+    FiltroProdutoComponent
   ],
   imports: [
     BrowserModule,

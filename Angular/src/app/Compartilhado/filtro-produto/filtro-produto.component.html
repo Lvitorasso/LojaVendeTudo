@@ -1,0 +1,13 @@
+<div class="list-group">
+
+    <a class="list-group-item list-group-item-action" 
+    style="width: 300px;" routerLink="/produtos" [class.active]="!this.categoria"> Todos </a>
+
+    <a class="list-group-item list-group-item-action" 
+    style="width: 300px;" routerLink="/produtos" [class.active]="this.categoria == categoria.CategoriaID"
+    [queryParams]="{categoria: categoria.CategoriaID}"    
+     *ngFor="let categoria of categorias">
+        {{categoria.Descricao}}
+    </a>
+
+  </div>
