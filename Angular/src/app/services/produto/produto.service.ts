@@ -1,16 +1,14 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { localStorageService } from '../localStorageService';
 
 @Injectable()
 export class ProdutoService {
 
-  constructor(private http: HttpClient, private localdb: localStorageService) {
+  constructor(private http: HttpClient) {
   }
 
   url: string = "https://localhost:44336";
-
 
   getProdutoPorID(id: number){    
     let params = new HttpParams();
@@ -32,11 +30,4 @@ export class ProdutoService {
   salvarProdutoPorID(Produto: any){
     return this.http.post(this.url+'/api/Produto/salvarProdutoPorID/Produto', Produto, { observe: 'response' });
   }
-
-}
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  })
 }

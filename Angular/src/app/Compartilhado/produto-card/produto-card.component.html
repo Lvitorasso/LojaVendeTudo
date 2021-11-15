@@ -7,7 +7,7 @@
 
       <div class="btn-group" role="group"  *ngIf="this.botao && this.jaAdicionado">
         <button type="button" (click)="diminuirQtd()" class="btn btn-outline-dark wrapper">-</button>
-        <button type="button" class="btn btn-outline-dark wrapper">{{this.qtd}}</button>
+        <button type="button" class="btn btn-outline-dark wrapper" disabled>{{this.qtd}}</button>
         <button type="button" (click)="aumentarQtd()" class="btn btn-outline-dark wrapper">+</button>
       </div>
       

@@ -1,7 +1,7 @@
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { localStorageService } from '../localStorageService';
 
 @Injectable()
@@ -16,8 +16,6 @@ export class PedidosService {
     return this.http.get('/api/orders').pipe(map((response: any) => response));
   }
 }
-
-
 
 const httpOptions = {
   headers: new HttpHeaders({
