@@ -1,3 +1,4 @@
+import { CategoriaService } from './../../../services/categoria/categoria.service';
 import { PessoaService } from './../../../services/pessoa/pessoa.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from './../../../services/produto/produto.service';
@@ -18,7 +19,7 @@ export class AdminProdutosEditComponent implements OnInit {
   categorias: any;
 
   constructor(private prodService: ProdutoService, private route: ActivatedRoute,
-   private router: Router, private pesService: PessoaService) { 
+   private router: Router, private pesService: PessoaService, private catService: CategoriaService) { 
     
     this.id = this.route.snapshot.paramMap.get('id');
     if(this.id){
@@ -33,7 +34,7 @@ export class AdminProdutosEditComponent implements OnInit {
     
     })
 
-    prodService.getTodasCategorias().pipe(take(1)).subscribe(resultado => {
+    catService.getTodasCategorias().pipe(take(1)).subscribe(resultado => {
       this.categorias = resultado;
     })
 

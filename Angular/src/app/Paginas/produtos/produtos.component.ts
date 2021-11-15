@@ -14,7 +14,7 @@ todosProdutos: Produto[] = [];
 produtos: Produto[] = [];
 categoria: string | null = "";
 
-  constructor( private prodService: ProdutoService, private route:ActivatedRoute) { 
+  constructor( private prodService: ProdutoService, private route: ActivatedRoute) { 
       prodService.getTodosProdutos().pipe(take(1)).subscribe(resultadoAPI => {
         this.produtos = resultadoAPI;
         this.todosProdutos = resultadoAPI;

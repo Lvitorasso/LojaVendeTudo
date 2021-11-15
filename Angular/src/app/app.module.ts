@@ -1,3 +1,4 @@
+import { CategoriaService } from './services/categoria/categoria.service';
 import { TiraVirgulaPipe } from './Compartilhado/Pipes/tiraVirgula.pipe';
 import { ProdutoService } from './services/produto/produto.service';
 import { PedidosService } from './services/pedido/pedido.service';
@@ -55,7 +56,8 @@ import { FiltroProdutoComponent } from './Compartilhado/filtro-produto/filtro-pr
     AuthGuard,
     AdminAuthGuard,
     PessoaService,
-    ProdutoService
+    ProdutoService,
+    CategoriaService
   ],
   bootstrap: [AppComponent]
 })

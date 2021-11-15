@@ -29,10 +29,6 @@ export class ProdutoService {
     return this.http.get(this.url+'/api/Produto/GetTodosProdutos').pipe(map((resultado: any) => resultado));
   }
 
-  getTodasCategorias(){
-    return this.http.get(this.url+'/api/Produto/getTodasCategorias').pipe(map((resultado: any) => resultado));
-  }
-
   salvarProdutoPorID(Produto: any){
     return this.http.post(this.url+'/api/Produto/salvarProdutoPorID/Produto', Produto, { observe: 'response' });
   }
