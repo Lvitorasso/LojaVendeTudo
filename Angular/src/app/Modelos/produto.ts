@@ -9,4 +9,5 @@ export class Produto{
       ImgSrc: string = '';
       fk_Fornecedor: number = 0; 
       fk_Categoria: number = 0; 
+      qtd: number = 0;
 }

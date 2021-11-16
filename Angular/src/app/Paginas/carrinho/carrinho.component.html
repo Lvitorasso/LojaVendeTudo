@@ -12,23 +12,35 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
+          <tr *ngFor="let produtoVIEW of produtos">
+            <td>
+              <img class="media-object align-self-start mr-3 rounded-circle" [src]="produtoVIEW.ImgSrc" style="width: 80px; height: 80px;">   </td>
             <td> 
-                <img class="media-object align-self-start mr-3 rounded-circle" src="https://dummyimage.com/30x30/000/fff" style="width: 80px; height: 80px;">   
+              {{produtoVIEW.Nome}}
             </td>
             <td>     
             <div class="btn-group" role="group" style="margin-bottom: 11px;">
-                <button type="button" (click)="diminuirQtd()" class="btn btn-outline-dark wrapper">-</button>
-                <button type="button" class="btn btn-outline-dark wrapper" disabled>{{qtd}}</button>
-                <button type="button" (click)="aumentarQtd()" class="btn btn-outline-dark wrapper">+</button>
+                <button type="button" (click)="diminuirQtd(produtoVIEW)" class="btn btn-outline-dark wrapper">-</button>
+                <button type="button" class="btn btn-outline-dark wrapper" disabled>{{produtoVIEW.qtd}}</button>
+                <button type="button" (click)="aumentarQtd(produtoVIEW)" class="btn btn-outline-dark wrapper">+</button>
             </div>
             </td>
             <td>
-                @mdo
+              {{produtoVIEW.PrecoUnitario}}
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2" style="text-align: left;">              
+              Total:
+            </td>
+            <td colspan="2" style="text-align: right;">              
+              {{precoTotal | currency:'BRL' }}
+            </td>
+          </tr>
+        </tfoot>
       </table>
+      <button class="btn btn-outline-dark" style="margin-right: 5rem;">Fechar pedido</button>
       <button class="btn btn-outline-danger">Limpar carrinho de compras</button>
 </div>

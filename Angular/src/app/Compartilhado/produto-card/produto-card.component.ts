@@ -14,7 +14,7 @@ export class ProdutoCardComponent implements OnInit {
   @Input('produto')produto: Produto = new Produto();
   @Input('botao')botao: Boolean = false;
   @Input('jaAdicionado')jaAdicionado: Boolean = false;
-  qtd: any
+  qtd: number = 0;
   
   constructor(private carService: CarrinhoService) { 
 
@@ -37,8 +37,9 @@ export class ProdutoCardComponent implements OnInit {
 
   adicionar(produto: Produto){    
     this.qtd = 1;
-    this.carService.adicionarAoCarrinho(produto, this.qtd)
     this.jaAdicionado = !this.jaAdicionado
+
+    this.carService.adicionarAoCarrinho(produto, 1)
   }
 
   diminuirQtd(produto: Produto){

@@ -21,9 +21,9 @@ export class CarrinhoService {
     {
      this.localdb.remove('produtoCarrinho'+produto.ProdutoID)
     }
-    
 
-    this.localdb.set('produtoCarrinho'+produto.ProdutoID,produto.ProdutoID+"/"+qtd)
+    if(!(qtd === 0))
+       this.localdb.set('produtoCarrinho'+produto.ProdutoID,produto.ProdutoID+"/"+qtd)
 
     this.change();
   }

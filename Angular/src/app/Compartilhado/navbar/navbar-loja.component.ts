@@ -11,7 +11,6 @@ import { take } from 'rxjs/operators'
 export class NavbarLojaComponent implements OnInit {
   usuario: string = "";
   carrinhoQTD: any;
-  _subscription: any;
 
   constructor(public authService: AuthService, private cartService: CarrinhoService) { 
     this.carrinhoQTD =  cartService.getCarrinhoCompletoQTD();
