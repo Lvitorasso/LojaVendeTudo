@@ -70,4 +70,13 @@ ngOnInit(): void {
     this.produtos[index].qtd = produto.qtd;    
   }
 
+  limparCarrinho(){
+    this.produtos.forEach(data => {
+      this.cartService.adicionarAoCarrinho(data, 0);      
+    })
+
+    this.produtos = [];
+    this.precoTotal = 0;
+  }
+
 }
