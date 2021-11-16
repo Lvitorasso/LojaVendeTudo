@@ -3,12 +3,12 @@
     <div class="card-body">
       <h4 class="card-title"><b>{{produto.Nome}}</b></h4>      
       <p class="card-text">R$ {{produto.PrecoUnitario}}</p>
-      <button class="btn btn-outline-dark wrapper" (click)="adicionar()" *ngIf="this.botao && !this.jaAdicionado"> Adicionar ao carrinho </button>
+      <button class="btn btn-outline-dark wrapper" (click)="adicionar(produto)" *ngIf="this.botao && !this.jaAdicionado"> Adicionar ao carrinho </button>
 
       <div class="btn-group" role="group"  *ngIf="this.botao && this.jaAdicionado">
-        <button type="button" (click)="diminuirQtd()" class="btn btn-outline-dark wrapper">-</button>
+        <button type="button" (click)="diminuirQtd(produto)" class="btn btn-outline-dark wrapper">-</button>
         <button type="button" class="btn btn-outline-dark wrapper" disabled>{{this.qtd}}</button>
-        <button type="button" (click)="aumentarQtd()" class="btn btn-outline-dark wrapper">+</button>
+        <button type="button" (click)="aumentarQtd(produto)" class="btn btn-outline-dark wrapper">+</button>
       </div>
       
     </div>

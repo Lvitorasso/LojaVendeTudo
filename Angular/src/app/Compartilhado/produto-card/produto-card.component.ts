@@ -1,3 +1,4 @@
+import { CarrinhoService } from './../../services/carrinho/carrinho.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Produto } from 'src/app/Modelos/produto';
 
@@ -15,29 +16,43 @@ export class ProdutoCardComponent implements OnInit {
   @Input('jaAdicionado')jaAdicionado: Boolean = false;
   qtd: any
   
-  constructor(
-  ) { 
+  constructor(private carService: CarrinhoService) { 
+
   }
 
   ngOnInit(): void {
+    let produtos = this.carService.getCarrinhoCompleto();
+
+    if(produtos)
+    {
+      produtos.forEach(data => {
+        if(data.produto == this.produto.ProdutoID)
+          {
+            this.jaAdicionado = true;
+            this.qtd = data.qtd;
+          } 
+      })
+    }
   }
 
-  adicionar(){    
-    this.jaAdicionado = !this.jaAdicionado
+  adicionar(produto: Produto){    
     this.qtd = 1;
+    this.carService.adicionarAoCarrinho(produto, this.qtd)
+    this.jaAdicionado = !this.jaAdicionado
   }
 
-  diminuirQtd(){
+  diminuirQtd(produto: Produto){
 
     this.qtd += this.qtd == 0 ? 0 : -1;
-
+    this.carService.adicionarAoCarrinho(produto, this.qtd)
     if(this.qtd == 0) 
       this.jaAdicionado = !this.jaAdicionado
   }
 
   
-  aumentarQtd(){
+  aumentarQtd(produto: Produto){    
     this.qtd++;
+    this.carService.adicionarAoCarrinho(produto, this.qtd);
   }
 
 

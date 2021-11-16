@@ -41,7 +41,7 @@
       </ul>
 
         <a class="navbar-brand" routerLink="/carrinho">     
-          <img width="30" height="20" src="./assets/carrinho-compra.png">
+          <img width="30" height="20" src="./assets/carrinho-compra.png"> {{carrinhoQTD}}
         </a>
     
         <p *ngIf="authService.estaLogado()" style=" margin-right: 10px;">

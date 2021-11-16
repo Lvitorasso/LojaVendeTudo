@@ -13,9 +13,13 @@ export class localStorageService {
     }
   }
 
-  get(key: string) {
+  get(key: string) 
+  {
     try 
     {
+      if(!localStorage.getItem(key))
+        return null
+
       return JSON.parse(localStorage.getItem(key) || '{}');
     } 
     catch (e) {
@@ -30,6 +34,31 @@ export class localStorageService {
     } 
     catch (e) {
       console.error('Erro ao remover do localStorage', e);
+      return null;
+    }
+  }
+
+  getAll() 
+  {
+    try 
+    {
+      let item: any[] = [];
+
+      Object.keys(localStorage).forEach(data => 
+        {
+          if(data.includes('produto'))
+          {
+             item.push(localStorage.getItem(data));
+          }
+        });
+        
+        if(item === [] || !item)
+          return null;
+
+        return item;
+    } 
+    catch (e) {
+      console.error('Erro ao pegar do localStorage', e);
       return null;
     }
   }

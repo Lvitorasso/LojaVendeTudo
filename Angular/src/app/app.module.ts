@@ -1,3 +1,4 @@
+import { CarrinhoService } from './services/carrinho/carrinho.service';
 import { CategoriaService } from './services/categoria/categoria.service';
 import { TiraVirgulaPipe } from './Compartilhado/Pipes/tiraVirgula.pipe';
 import { ProdutoService } from './services/produto/produto.service';
@@ -57,7 +58,8 @@ import { FiltroProdutoComponent } from './Compartilhado/filtro-produto/filtro-pr
     AdminAuthGuard,
     PessoaService,
     ProdutoService,
-    CategoriaService
+    CategoriaService,
+    CarrinhoService
   ],
   bootstrap: [AppComponent]
 })
