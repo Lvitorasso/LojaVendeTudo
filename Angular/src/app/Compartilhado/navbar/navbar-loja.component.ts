@@ -1,7 +1,6 @@
 import { CarrinhoService } from './../../services/carrinho/carrinho.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'navbarloja',
@@ -22,6 +21,9 @@ export class NavbarLojaComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
+
 
   logout(){
     this.authService.deslogar();

@@ -17,7 +17,7 @@ export class AdminAuthGuard implements CanActivate {
   if(JSON.stringify(usuario) == '{}')
     return false;
 
-   if(this.authService.usuarioAtual.role.includes('admin'))
+   if(this.authService.getRole().includes('admin'))
       return true;
 
       this.router.navigate(['/no-access']);

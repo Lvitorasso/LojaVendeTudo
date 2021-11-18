@@ -13,20 +13,20 @@
         </li> 
         <li ngbDropdown class="nav-item dropdown" *ngIf="authService.estaLogado()">
           <a ngbDropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{authService.usuarioAtual.unique_name}}
+            {{authService.getName()}}
           </a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
             <!-- [queryParams]="{categoria: 1, order: 'populares'}" -->
             <a class="dropdown-item" routerLink="/minhas/Compras">
               Meus pedidos
             </a>           
-           <a class="dropdown-item" routerLink="/adm/Pedidos"  *ngIf="authService.estaLogado() && authService.usuarioAtual.role.includes('admin')"> 
+           <a class="dropdown-item" routerLink="/adm/Pedidos"  *ngIf="authService.estaLogado() && authService.getRole().includes('admin')"> 
               Adm. pedidos
             </a>           
-          <a class="dropdown-item" routerLink="/adm/Produtos"  *ngIf="authService.estaLogado() && authService.usuarioAtual.role.includes('admin')">
+          <a class="dropdown-item" routerLink="/adm/Produtos"  *ngIf="authService.estaLogado() && authService.getRole().includes('admin')">
             Adm. produtos
             </a>
-            <a class="dropdown-item" routerLink="/adm/Usuarios"  *ngIf="authService.estaLogado() && authService.usuarioAtual.role.includes('admin')">
+            <a class="dropdown-item" routerLink="/adm/Usuarios"  *ngIf="authService.estaLogado() && authService.getRole().includes('admin')">
               Adm. Usuarios
             </a>
           </div>         
@@ -41,11 +41,12 @@
       </ul>
 
         <a class="navbar-brand" routerLink="/carrinho">     
-          <img width="30" height="20" src="./assets/carrinho-compra.png"> {{carrinhoQTD}}
+          <img  width="30" height="20" src="./assets/carrinho-compra.png"> 
+          <div *ngIf="carrinhoQTD != 0">{{carrinhoQTD}}</div>
         </a>
     
         <p *ngIf="authService.estaLogado()" style=" margin-right: 10px;">
-          Bem vindo(a) <a routerLink="/perfil">{{authService.usuarioAtual.unique_name}} </a>
+          Bem vindo(a) <a routerLink="/perfil">{{authService.getName()}} </a>
           |
           <a href="#" (click)="logout()">Sair</a>
         </p>

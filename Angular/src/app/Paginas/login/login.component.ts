@@ -45,17 +45,16 @@ export class LoginComponent implements OnInit {
       });
   }
 
- logarGoogle(){   
-     this.authService.logarGoogle().subscribe(result => { 
-       console.log("RESULTTTTTTTTT" + result)
-      if (result){
-        let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
-        this.router.navigate([returnUrl || '/']);
-      }
-      else  {
-        this.invalidLogin = true; 
-      }
-    });
+ async logarGoogle(){   
+     let retorno = await this.authService.logarGoogle();
+
+     if (retorno){
+      let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+      this.router.navigate([returnUrl || '/']);
+    }
+    else  {
+      this.invalidLogin = true; 
+    }
   }
 
   deslogarGoogle(){

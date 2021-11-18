@@ -15,6 +15,9 @@ export class AuthService {
   private _url = 'https://localhost:44336';  
   auth2: any;
   private subject = new ReplaySubject<gapi.auth2.GoogleUser>(1);
+  
+  private name: string = "";
+  private role: string = "";
 
   constructor(private http: HttpClient, 
     private localdb: localStorageService,
@@ -57,58 +60,30 @@ export class AuthService {
       }, catchError(this.handleError)));
   }
   
-//   logarGoogle(){ 
-//     let promise =  new Promise<boolean>((resolve, reject) => {
-//        this.auth2.signIn({ 
-//         scope: 'https://www.googleapis.com/auth/gmail.readonly'
-//       }).then( (user:any) => {
-//         this.subject.next(user);
-  
-//         this.localdb.set('token', user.getAuthResponse().access_token);
-//         this.localdb.set('usuario', user.getBasicProfile().getName());     
-    
-//         console.log("loguei ok")
-        
-//         return true;     
-//       })
-
-//       console.log("não loguei ok")
-//       return false; 
-//     })
-    
-//     return promise;
-//  }
-
-logarGoogle(){ 
-       const resp = of(this.auth2.signIn({ 
+   async logarGoogle(){ 
+      let promise = await this.auth2.signIn({ 
          scope: 'https://www.googleapis.com/auth/gmail.readonly'
        }).then( (user:any) => {
-                this.subject.next(user);
-    
-                //this.localdb.set('token', user.getAuthResponse().access_token);
-                this.localdb.set('usuario', user.getBasicProfile().getName());   
-                
-               let t = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImxvamFWZW5kZVR1ZG8iLCJyb2xlIjoiYWRtaW4iLCJuYmYiOjE2MzYyMDQ3NjMsImV4cCI6MTYzNjIxMTk2MywiaWF0IjoxNjM2MjA0NzYzfQ.meGsdEicab_LqrGPEIY63UzeBSIGWxsrncTZ_dB5Nc0";
-               this.localdb.set('token', t);
+         this.subject.next(user);
 
-               
-              })).pipe(map((response: any) => {
-        console.log(response)
-            if(response)
-            {  
-              return true;
-            }
-          
-            return false; 
-       }, catchError(this.handleError)))
+         return user;
+       }
+    )  
 
-       
-       return resp;
+    if(!promise) 
+       return false;
+
+       this.localdb.set('role', 'user');
+       this.localdb.set('usuario', promise.getBasicProfile().getName());                   
+       this.localdb.set('token', promise.getAuthResponse(true).id_token);
+
+     return true;
   }
 
   deslogar() { 
     this.localdb.remove('token');
     this.localdb.remove('usuario');
+    this.localdb.remove('role');
   }
 
   estaLogado() {     
@@ -135,7 +110,7 @@ logarGoogle(){
    }
 
 
-   get usuarioAtual(){     
+  usuarioAtual(){     
     let token = this.localdb.get('token');
 
      if(!token || token == undefined || token == null || JSON.stringify(token) == '{}')
@@ -144,6 +119,24 @@ logarGoogle(){
       return new JwtHelperService().decodeToken(token);
    }
    
+  getName(){
+    this.name = this.usuarioAtual().unique_name;
+
+    if(!this.name)
+       this.name = this.usuarioAtual().name;
+
+       return this.name;
+  }
+
+  getRole(){
+    this.role = this.usuarioAtual().role;
+
+    if(!this.role)
+       this.role = "user";
+
+       return this.role;
+  }
+
    private handleError(error: Response){
     if(error.status == 404)
       return throwError(new NotFoundError(error.json)); 
