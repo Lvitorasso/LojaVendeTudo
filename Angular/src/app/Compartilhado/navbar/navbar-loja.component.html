@@ -42,7 +42,10 @@
 
         <a class="navbar-brand" routerLink="/carrinho">     
           <img  width="30" height="20" src="./assets/carrinho-compra.png"> 
-          <div *ngIf="carrinhoQTD != 0">{{carrinhoQTD}}</div>
+            <span  *ngIf="carrinhoQTD != 0" class="badge badge-pill badge-dark" style="color: black; background-color:burlywood;">
+              {{carrinhoQTD}}
+            </span>
+            
         </a>
     
         <p *ngIf="authService.estaLogado()" style=" margin-right: 10px;">
