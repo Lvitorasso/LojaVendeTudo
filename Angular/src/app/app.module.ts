@@ -22,9 +22,9 @@ import { NavbarLojaComponent } from './Compartilhado/navbar/navbar-loja.componen
 import { PropagandaSlideComponent } from './Compartilhado/Propaganda/propaganda-slide.component';
 import { FooterLojaComponent } from './Compartilhado/footer-loja/footer-loja.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AdminProdutosEditComponent } from './Paginas/admin/admin-produtos-edit/admin-produtos-edit.component';
 import { ProdutoCardComponent } from './Compartilhado/produto-card/produto-card.component';
 import { FiltroProdutoComponent } from './Compartilhado/filtro-produto/filtro-produto.component';
+import { OrderCardComponent } from './Paginas/order-card/order-card.component';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import { FiltroProdutoComponent } from './Compartilhado/filtro-produto/filtro-pr
     FooterLojaComponent,
     ProdutoCardComponent,
     TiraVirgulaPipe,
-    FiltroProdutoComponent
+    FiltroProdutoComponent,
+    OrderCardComponent
   ],
   imports: [
     BrowserModule,

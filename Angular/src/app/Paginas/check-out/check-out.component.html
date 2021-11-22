@@ -1,1 +1,27 @@
-<p>check-out works!</p>
+<form action="submit" #f="ngForm" (ngSubmit)="realizarPedido(f.value)">
+    <div class="container">
+        <h1>Envio</h1>
+        <div class="row">
+            <div class="col-6">
+                    <label for="inpNome" class="sr-only lblStyle">
+                      Nome:
+                   </label>
+                    <input ngModel required type="text" class="form-control inputStyle"  id="inpNome" name="Nome"
+                     #_inpNome="ngModel"
+                     minlength="3" 
+                     maxlength="30">       
+                     <label for="inpEndereco" class="sr-only lblStyle">
+                        Endereço:
+                     </label>
+                      <input ngModel required type="text" class="form-control inputStyle"  id="inpEndereco" name="Endereco"
+                       #_inpNome="ngModel"
+                       minlength="3" 
+                       maxlength="30">   
+            </div>
+            <div class="col-6">
+                <order-card></order-card>
+            </div>
+        </div>
+        <button class="btn btn-dark">Realizar pedido</button>
+    </div>
+</form>

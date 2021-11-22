@@ -1,0 +1,16 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h2 class="card-title">Resumo da compra</h2>
+      <p class="card-text">Você tem {{this.qtd}} itens no carrinho. </p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let produto of produtos">    
+            <span class="card-text" style="text-align: left;"> {{produto.qtd}} x {{produto.Nome}} </span>
+
+            <span style="text-align: right;">{{produto.PrecoUnitario  | currency:'BRL'}}</span>
+      </li>
+    </ul>
+    <div class="card-body">
+        <h2>Total: {{this.precoTotal  | currency:'BRL'}} </h2>
+    </div>
+  </div>

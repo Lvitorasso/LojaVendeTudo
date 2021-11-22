@@ -41,6 +41,6 @@
           </tr>
         </tfoot>
       </table>
-      <button class="btn btn-outline-dark" style="margin-right: 5rem;">Fechar pedido</button>
-      <button class="btn btn-outline-danger" (click)="limparCarrinho()">Limpar carrinho de compras</button>
+      <button class="btn btn-outline-dark" style="margin-right: 5rem;" *ngIf="this.qtd >= 1" routerLink="/checkOut">Fechar pedido</button>
+      <button class="btn btn-outline-danger" (click)="limparCarrinho()" *ngIf="this.qtd >= 1">Limpar carrinho de compras</button>
 </div>

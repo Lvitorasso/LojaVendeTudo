@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LojaVendeTudo.API.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -46,23 +47,14 @@ namespace LojaVendeTudo.API.Controllers
             return Unauthorized();
         }
 
-        // GET api/<PedidosController>/5
-        [HttpGet("{id}")]
-        private string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<PedidosController>
+        [Route("/api/RealizarPedido/Pedido")]
         [HttpPost]
-        private void Post([FromBody] string value)
+        public IActionResult RealizarPedido(PedidoRequisicao pedido)
         {
+
+            return Ok();
         }
 
-        // PUT api/<PedidosController>/5
-        [HttpPut("{id}")]
-        private void Put(int id, [FromBody] string value)
-        {
-        }
     }
 }
