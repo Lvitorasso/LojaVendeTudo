@@ -7,7 +7,7 @@ namespace LojaVendeTudo.API.Models
 {
     public class PedidoRequisicao
     {
-        public Produto[] Produtos { get; set; }
+        public string[] Produtos { get; set; }
         public string Nome { get; set; }
         public string Endereco { get; set; }
     }

@@ -1,8 +1,8 @@
+import { ProdutoReq } from './../../Modelos/produtoReq';
+import { Produto } from './../../Modelos/produto';
 import { PedidosService } from 'src/app/services/pedido/pedido.service';
-import { Component, OnInit } from '@angular/core';
-import { combineLatest, forkJoin, of } from 'rxjs';
+import { Component, OnInit, Pipe } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { Produto } from 'src/app/Modelos/produto';
 import { CarrinhoService } from 'src/app/services/carrinho/carrinho.service';
 import { ProdutoService } from 'src/app/services/produto/produto.service';
 import { Pedido } from 'src/app/Modelos/pedido';
@@ -21,31 +21,60 @@ export class CheckOutComponent implements OnInit {
   ngOnInit(): void {
   }
 
- async realizarPedido(data: any)
+ 
+  async realizarPedido(data: any)
   {  
     let pedido = new Pedido();
     let produtosCarrinho = this.cartService.getCarrinhoCompleto();
-  
+    let count = 0
+
     if(produtosCarrinho)
     {
-      produtosCarrinho.forEach(dataForEach => {
-        let produto = new Produto();
-            this.prodService.getProdutoPorID(dataForEach.produto).pipe(take(1)).subscribe(produtoAPI => {
-              produto = produtoAPI;
-              produto.qtd = dataForEach.qtd;
+      // produtosCarrinho.forEach(dataForEach => {
+      //   let produto = new Produto();
+      //       this.prodService.getProdutoPorID(dataForEach.produto).pipe(take(1)).subscribe(produtoAPI => {
+      //         produto = produtoAPI;
+      //         produto.qtd = dataForEach.qtd;
   
-              pedido.Produtos.push(produto)
-            })
-      })    
- 
+      //         pedido.Produtos.push(JSON.stringify(produto))
+      //       })           
+      // })  
+      
+     const promesa = new Promise(async (resolve) => 
+     { 
+       try
+       {
+          for(let i = 0; i < produtosCarrinho.length; i++) 
+          {
+                let produto = new ProdutoReq();
+
+                   produto.ProdutoID = produtosCarrinho[i].produto;
+                   produto.qtd = produtosCarrinho[i].qtd;
+              
+                   pedido.Produtos.push(JSON.stringify(produto))                
+          }
+        } 
+        catch (e) 
+        {
+          console.log(e);
+        } 
+        finally 
+        {
+            resolve("Promise Resolved");
+        }
+      })
+    
+    promesa.then(() => 
+    {    
       pedido.Endereco = data.Endereco;
       pedido.Nome = data.Nome;   
       
-      console.log( JSON.parse(JSON.stringify(pedido)))
 
-     this.pedService.realizarPedido(pedido).subscribe(response =>{
+     this.pedService.realizarPedido(pedido).subscribe(response =>
+      {
        console.log('chamei hein')
-     });
+      });
+    })
     }
     else
     {

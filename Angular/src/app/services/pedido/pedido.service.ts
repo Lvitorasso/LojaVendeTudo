@@ -23,10 +23,6 @@ export class PedidosService {
 
   realizarPedido(pedido: any)
   {
-    //https://localhost:44336/api/RealizarPedido/Pedido 
-    console.log(this.url+'/api/RealizarPedido/Pedido')
-    
-
     return this.http.post(this.url+'/api/RealizarPedido/Pedido', pedido, { observe: 'response' });
   }
 }

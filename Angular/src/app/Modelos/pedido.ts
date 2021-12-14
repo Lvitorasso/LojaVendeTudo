@@ -1,7 +1,7 @@
-import { Produto } from "./produto";
+import { Produto } from 'src/app/Modelos/produto';
 
 export class Pedido{
-    Produtos: Produto[] = [];
+    Produtos: string[] = [];
     Nome: string = ''; 
     Endereco: string = '';  
 }
